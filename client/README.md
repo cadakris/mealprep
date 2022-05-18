@@ -1,3 +1,23 @@
+5/17
+- Do tutorial on drag and drop
+- Figure out authentication 
+
+5/18
+- Work on implementing drag and drop with your data
+- Finish Authentication
+- Create known components
+- Build simple login page
+
+
+5/19
+- Work on full CRUD
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
