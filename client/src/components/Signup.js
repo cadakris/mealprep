@@ -8,10 +8,10 @@ const defaultFormState = {
     password_confirmation:""
 }
 
-function Signup() {
+function Signup({setUser}) {
 
 const [formData, setFormData] = useState (defaultFormState)
-
+const [errors, setErrors] = useState(null);
 
 function handleChange (e) {
     setFormData ({
@@ -33,14 +33,33 @@ function handleSubmit (e){
     })
     .then((res) => res.json())
     .then((userObj) => {
-        console.log("User signup data:", userObj )
+        console.log("User signup data:", userObj)
+
+        if (userObj.username) {
+            setUser(userObj);
+            setErrors(null);
+          } else {
+            if (userObj.errors) {
+              setErrors(userObj.errors);
+            } else {
+              setErrors(null);
+            }
+            setUser(null);
+          }
     })
+    .catch((error) => console.log(error.message));
+    //reset form
+    setFormData(defaultFormState)
+}
+
+function handleSignUpButton (e) {
+    console.log("what it do")
 }
 
   return (
-    <div className="signUpContainer">
+    <>
         <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="signUpInfo">
+            <h1 className="whiteSide">Create Account</h1>
                 <label> Name: </label>
                     <input
                         type="text"
@@ -76,10 +95,9 @@ function handleSubmit (e){
                         value={formData.password_confirmation}
                         onChange={handleChange}
                     ></input>              
-            </div>
-            <button type="submit">Submit</button>
+            <button onClick={handleSignUpButton}>Submit!</button>
         </form>
-    </div>
+    </>
 
   )
 }

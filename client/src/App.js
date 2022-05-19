@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,  } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import _ from "lodash"
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { v4 } from 'uuid'
 
-import Signup from './components/Signup'
-import Login from './components/Login'
-import LandingPage from './components/LandingPage'
 
+import LandingPage from './components/LandingPage'
+import UserRecipePage from './components/UserRecipePage'
 
 
 function App() {
   const [user, setUser] = useState(null);
+
 
   //LOGIN
   useEffect(() => {
@@ -107,28 +107,22 @@ const handleAddItem = () => {
 
 //START OF RETURN
   return (
-<>
+<div className="landingPage">
 
 <BrowserRouter>
   <Routes>
     <Route
-      path="/signup"
-      element={<Signup />}
-    ></Route>
-
-    <Route
-        path="/login"
-        element={<Login />}
-    ></Route>
-
-    <Route
         path="/"
-        element={<LandingPage />}
+        element={
+          <LandingPage setUser={setUser}/>}
     ></Route>
 
-
+    <Route
+      path="/user-recipe-page"
+      element={<UserRecipePage/>}
+  
+    ></Route>
   </Routes>
-
 </BrowserRouter>
 
 
@@ -183,7 +177,7 @@ const handleAddItem = () => {
       </DragDropContext>
     </div> */}
 
-</>
+</div>
   );
 }
 

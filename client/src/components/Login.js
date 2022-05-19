@@ -34,10 +34,10 @@ function handleSubmit (e) {
 }
 
 
-
   return (
-    <div className="loginContainer">Login
+    <>
         <form onSubmit={(e) => handleSubmit(e)}>
+            <h1 className="whiteSide">Sign In</h1>
             <label>Username</label>
             <input
                 type="text"
@@ -53,9 +53,9 @@ function handleSubmit (e) {
                 value={formData.password}
                 onChange={handleChange}
             ></input>
-            <button>Submit</button>
+            <button>Log In</button>
         </form>
-    </div>
+    </>
 
   )
 }
