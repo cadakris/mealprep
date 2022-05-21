@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 const defaultFormState = { username: "", password: "" };
 
-function Login() {
+function Login({setUser}) {
 
 const [formData, setFormData] = useState(defaultFormState)
+const [error, setError] = useState(null);
+
+const navigate = useNavigate();
 
 function handleChange (e) {
     setFormData({
@@ -30,8 +34,25 @@ function handleSubmit (e) {
         .then((res) => res.json())
         .then((userObj) => {
           console.log("Logged in user: ", userObj);
-    })
+          if (userObj.username) {
+            navigate("/user-recipe-page")
+            setUser(userObj);
+            setError(null);
+
+          } else {
+            if (userObj.error) {
+              setError(userObj.error.login);
+            } else {
+              setError(null);
+            }
+            setUser(null);
+          }
+        })
+        .catch((error) => console.log(error.message));
 }
+
+
+const errorsToDisplay = error === null ? null : error;
 
 
   return (
@@ -54,6 +75,7 @@ function handleSubmit (e) {
                 onChange={handleChange}
             ></input>
             <button>Log In</button>
+            <span className="errorMessage">{errorsToDisplay}</span>
         </form>
     </>
 

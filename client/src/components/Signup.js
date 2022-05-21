@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 const defaultFormState = {
     full_name:"",
@@ -12,6 +13,8 @@ function Signup({setUser}) {
 
 const [formData, setFormData] = useState (defaultFormState)
 const [errors, setErrors] = useState(null);
+
+const navigate = useNavigate();
 
 function handleChange (e) {
     setFormData ({
@@ -36,6 +39,7 @@ function handleSubmit (e){
         console.log("User signup data:", userObj)
 
         if (userObj.username) {
+            navigate("/user-recipe-page")
             setUser(userObj);
             setErrors(null);
           } else {
@@ -55,6 +59,8 @@ function handleSubmit (e){
 function handleSignUpButton (e) {
     console.log("what it do")
 }
+
+const errorsToDisplay = errors === null ? null : errors[0];
 
   return (
     <>
@@ -96,6 +102,7 @@ function handleSignUpButton (e) {
                         onChange={handleChange}
                     ></input>              
             <button onClick={handleSignUpButton}>Submit!</button>
+            <span className="errorMessage">{errorsToDisplay}</span>
         </form>
     </>
 
