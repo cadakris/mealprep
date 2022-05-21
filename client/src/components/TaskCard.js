@@ -5,7 +5,7 @@ import { Draggable } from "react-beautiful-dnd"
 function TaskCard({recipe, index}) {
   return (
     <>
-    <Draggable key={recipe.id} draggableId={recipe.title_name} index={index}>
+    <Draggable key={recipe.id} draggableId={recipe.id.toString()} index={index}>
         {provided =>(
             <div
                 ref={provided.innerRef}

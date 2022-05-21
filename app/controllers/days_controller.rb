@@ -21,7 +21,7 @@ end
 #POST / day
     def create
         day = Day.create!(day_params)
-        session[:user_id] = user.id
+        Recipe.create!(recipe_params)
         render json: day, status: :created
     end
 
@@ -31,4 +31,9 @@ end
     def day_params
         params.permit(:user_id, :title_day)
     end
+
+    def recipe_params
+        params.permit(:recipe_name, :ingredients, :instructions, :categories, :comment)
+    end
+
 end

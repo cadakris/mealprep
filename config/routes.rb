@@ -15,9 +15,9 @@ Rails.application.routes.draw do
     resources :days, only: [:index, :show]
   end
 
-  resources :users, only: [:show, :index] do
-    resources :recipes, only: [:index, :show]
-  end
+  # resources :users, only: [:show, :index] do
+  #   resources :recipes, only: [:index, :show]
+  # end
 
 
 
