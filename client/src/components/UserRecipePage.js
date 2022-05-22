@@ -13,7 +13,7 @@ const defaultFormState = {
     }
 
 function UserRecipePage({setUser, user}) {
-//STATE
+//set columndays gets the data - title, description, the columns etc. 
   const [columnDays, setColumnDays] = useState([])
   const [formData, setFormData] = useState(defaultFormState)
 
@@ -21,7 +21,7 @@ function UserRecipePage({setUser, user}) {
   function handleFormSubmit(e){
     e.preventDefault()
   
-    fetch('/recipes', {
+    fetch(`/recipes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,25 @@ function UserRecipePage({setUser, user}) {
     })
     .then((res) => res.json())
     .then((recipeObj) => {
-      console.log(recipeObj)}
+      fetch('/meal_recipe_days', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          recipe_id: recipeObj.id,
+          day_id: user.days[0].id,
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        fetch(`/users/${user.id}/days`)
+        .then((res) => res.json())
+        .then((arrOfDays) => setColumnDays(arrOfDays))
+      })
+      }
     )}
 
   //HANDLING FORM INPUTS
@@ -48,20 +66,34 @@ function handleChange (e) {
     .then((res) => res.json())
     .then((arrOfDays) => setColumnDays(arrOfDays))
   },[])
+  
+
 
   
   //ALL THE REST OF THE FUNCTIONS FOR THE NEW NEW DRAG AND DROP
 
+  // const [list, setList] = useState([()])
+
   const onDragEnd = (result, columnsDays, setColumnDays) => {
+    console.log("columnDays:", columnDays)
+    console.log("result:", result)
     if (!result.destination) return
-    const { source, destination } = result
+    //destruction result into source ad destiation
+    const { source, destination} = result
+    console.log(result.draggableID)
     if (source.droppableId !== destination.droppableId) {
       const sourceColumn = columnsDays[source.droppableId]
+      console.log("initial state of the source",sourceColumn)
       const destColumn = columnsDays[destination.droppableId]
+      console.log("where the card is going:", destColumn)
       const sourceRecipes = [...sourceColumn.recipes]
+      console.log("source recipes", sourceRecipes)
       const destRecipes = [...destColumn.recipes]
+      console.log("destination recipes", destRecipes)
+      console.log(`${destRecipes.id}`)
       const [removed] = sourceRecipes.splice(source.index, 1)
       destRecipes.splice(destination.index, 0, removed)
+      //THIS IS FOR WHEN WE CHANGE FROM COLUMN TO COLUMN. FIRST WE WANT TO 
       setColumnDays({
         ...columnsDays,
         [source.droppableId]: {
@@ -73,6 +105,25 @@ function handleChange (e) {
           recipes: destRecipes,
         },
       })
+      console.log("new state of column days:", columnDays)
+      console.log("day_id:", destination.droppableId)
+
+    // UPDATE TO CHANGE ON THE BACKEND
+      fetch(`/users/${user.id}/days`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          day_id: `${destination.droppableId}`
+        })
+      })
+      .then(response => response.json())
+      .then(newData => console.log(newData))
+
+
+    //THIS IS FOR WHEN WE ARE REARRANGING THE INDEX WITHIN THE COLUMN
     } else {
       const column = columnsDays[source.droppableId]
       const copiedItems = [...column.items]
@@ -149,15 +200,17 @@ function handleChange (e) {
   <div className="column-container">
     <div className="columnDays">
       {Object.entries(columnDays).map(([columnId, column], index) => {
-        return (
-          <Droppable key={columnId} droppableId={columnId}>
+        return ( 
+          // console.log(columnId)
+          // console.log(Object.entries(columnDays))
+          <Droppable key={columnId} droppableId={columnId} columnDays={columnDays} setColumnDays={setColumnDays}>
             {(provided, snapshot) => (
               <div className="taskList"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
                 <h1 className="columnTitle"> {column.title_day} </h1>
-                {column.recipes.map((recipe, index) => (
+                {column?.recipes?.map((recipe, index) => (
                   <TaskCard key={recipe.id} recipe={recipe} index={index}  />
                 ))}
                 {provided.placeholder}

@@ -6,22 +6,12 @@ Rails.application.routes.draw do
   resources :recipes
   resources :users
 
-  # resources :users, only: [:show, :index] do
-  #   resources :recipes, only: [:index, :show]
-  #   resources :meal_days, only: [:index, :show]
-  # end
 
   resources :users, only: [:show, :index] do
-    resources :days, only: [:index, :show]
+    resources :days, only: [:index, :show, :create] do
+      resources :recipes, only: [:create, :show]
+    end
   end
-
-  # resources :users, only: [:show, :index] do
-  #   resources :recipes, only: [:index, :show]
-  # end
-
-
-
-  # get "/users_days_recipes", to: "days#users_days"
 
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
