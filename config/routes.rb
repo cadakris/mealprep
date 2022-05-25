@@ -7,16 +7,23 @@ Rails.application.routes.draw do
   resources :users
 
 
-  resources :users, only: [:show, :index] do
-    resources :days, only: [:index, :show, :create] do
-      resources :recipes, only: [:create, :show]
+  resources :users, only: [:show, :index, :update] do
+    resources :days, only: [:index, :show, :create, :update] do
+      resources :recipes, only: [:create, :show, :update]
     end
   end
+
+  
+    resources :recipes, only: [:create, :show, :update, :index] do 
+      resources :days, only: [:index, :show, :create, :update]
+    end
+  
 
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
+  get "/user/:id", to: "users#getsuser"
 
 
   # Routing logic: fallback requests for React Router.

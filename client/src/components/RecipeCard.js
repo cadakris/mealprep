@@ -1,32 +1,28 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Draggable } from "react-beautiful-dnd"
 import { RiDeleteBin2Fill } from "react-icons/ri"
+import { FaEdit } from "react-icons/fa"
 
-function TaskCard({recipe, index, columnDays, setColumnDays}) {
-
-    // function deleteRecipe () {
-    //     console.log("i work")
-    //     console.log(recipe)
-    // }
-
-    // function deleteItem(deletedItem) {
-    //     fetch(`http://localhost:9292/itemdelete/${deletedItem.id}`, {
-    //       method: "DELETE",
-    //     })
-    //     setUserItems({...userItems, items: userItems.items.filter(item => item.id !== deletedItem.id)})
-    //   }
-
-    function handleClick() {
-        console.log(recipe.id)
-        console.log({columnDays})
+function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, clickedRecipe}) {
+  
+    function handleDeleteClick() {
         fetch(`/recipes/${recipe.id}`, {
           method: "DELETE",
         })
         .then((res) => res.json())
-        .then((deletedData) => console.log(deletedData))
+        .then((deletedData) => {
+          console.log(deletedData)
+          fetch(`/users/${user.id}/days`)
+          .then((res) => res.json())
+          .then((arrOfDays) => setColumnDays(arrOfDays))
+        })
       }
 
-    //   setColumnDays({...columnDays, items: userItems.items.filter(item => item.id !== deletedItem.id)})
+    function handleEditClick () {
+      console.log(recipe)
+      setClickedRecipe(recipe)
+      console.log(recipe.instructions)
+    }
 
   return (
     <>
@@ -40,11 +36,14 @@ function TaskCard({recipe, index, columnDays, setColumnDays}) {
                 <div className="taskInformation">
                     <p>{recipe.recipe_name}</p>
                         <div className="secondary-details">
-                        <p>{recipe.instructions}</p>
+                        <p>{recipe.recipe_name}</p>
                         </div>
                     <div className="closeButton">
                     <RiDeleteBin2Fill
-                        onClick={handleClick}
+                        onClick={handleDeleteClick}
+                    />
+                    <FaEdit
+                        onClick={handleEditClick}
                     />
                 </div>
                 </div>
@@ -56,4 +55,4 @@ function TaskCard({recipe, index, columnDays, setColumnDays}) {
   )
 }
 
-export default TaskCard
+export default RecipeCard

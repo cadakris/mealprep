@@ -9,6 +9,11 @@
   box-sizing: border-box;
 }
 
+/* NAV BAR---------------------------------------------------------> */
+.btn{
+  color:rgba(16, 149, 125, 0.15)
+}
+
 /* LOGIN / SIGNUP ---------------------------------------------------------> */
 
 .fuckingwork {
@@ -22,7 +27,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   margin: -20px 0 50px;
 }
 
@@ -35,13 +40,13 @@
   margin-bottom: 15px;
 }
 
-.welcomeMessage {
+/* .welcomeMessage {
   font-size: 14px;
   font-weight: 100;
   line-height: 20px;
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
-}
+} */
 
 .container-mainforms {
   background: white;
@@ -256,38 +261,111 @@ button.ghost {
   color: #7d7d7d;
 } 
 
-/* OLD SHIT OLD SHIT -DRAGGABLES AND CARDS----------------------------------------------------> */
-/* .App {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-} */
-
-/* .App .column {
-  width: 30%;
+/* MODAL */
+.modal {
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  max-width: 100%;
+  height: 700px;
+  max-height: 100%;
+  /* animation: pop-swirl 0.5s; */
+  background-color: white;
 }
 
-.droppable-col {
-  width: 100%; 
-  height: 50px;
-  background-color: gray;
-  padding: 10px 10px 0 10px;
-  border-right: 7px;
+/* .modalContent.scroll {
+  padding: 4px;
+  width: 700px;
+  height: 700px;
+  overflow-x: hidden;
+  overflow-y: auto;
+} */
+
+.modal-background-mask {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: gray;
+}
+
+
+/* MODAL GRID */
+
+.grid-item1 {
+  grid-area: header;
+}
+
+.grid-item2 {
+  grid-area: ingredients;
+  border: 1px solid black;
+}
+
+.grid-item3 {
+  grid-area: instructions;
+  border: 1px solid black;
+}
+
+.grid-item4 {
+  grid-area: comments;
+  border: 1px solid black;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
+  grid-template-areas: 
+      "header header"
+      "ingredients instructions"
+      "ingredients instructions"
+      "comments comments";
+
+}
+
+.grid-container p {
+  text-align: center;
+}
+
+/* text areq card*/
+
+input, textarea {
+  background-color: transparent;
+  border: 0;
+  padding: 8px 16px;
+  border-radius: 3px;
+  font-size: 24px;
+  border: 2px solid #161822;
+}
+
+input:hover {
+  /* background-color: #161822; */
+  cursor: pointer;
+}
+
+textarea {
+  margin-top: 24px;
+  resize: none;
+  overflow: hidden;
+  min-height: 14px;
+  max-height: 800px;
+  font-size: 14px;
+}
+
+textarea:focus {
+  outline: 5px auto -webkit-focus-ring-color; /* Chrome, Safari */
+}
+
+/* #container {
   display: flex;
   flex-direction: column;
-} */
-
-/* Only apply margin bottom to draggables*/
-/* .item {
-  margin-bottom: 10px; 
-  color: white;
-  border: 1px solid white;
-  padding: 5px;
-  border-radius: 7px;
-  background-color: black;
-
-}
-
-.item.dragging {
-  background-color: coral
+  margin: 8px;
+  width: 300px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #D8DEE9;
 } */

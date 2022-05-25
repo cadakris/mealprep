@@ -2,7 +2,8 @@ class DaysController < ApplicationController
 
 #GET / all the days (with recipes attached)
 def index
-    render json: Day.all
+
+    render json: Day.all.where(user_id: session[:user_id])
 end
 
 #GET / day/id
