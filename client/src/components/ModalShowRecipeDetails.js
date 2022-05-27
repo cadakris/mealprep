@@ -6,13 +6,12 @@ function ModalShowRecipeDetails({clickedRecipe}) {
     const valDirections = clickedRecipe.instructions
     const commentVal = clickedRecipe.comment
 
+    
+
     console.log("clicked recipe:",clickedRecipe)
 
-
-
-    
-    const [editIngredientValue, setEditIngredientValue] = useState(valIngredients)
-    const [editDirectionsValue, setEditDirectionsValue] = useState(valDirections)
+    const [editIngredientValue, setEditIngredientValue] = useState(valIngredients.join("\n"))
+    const [editDirectionsValue, setEditDirectionsValue] = useState(valDirections.join("\n"))
     const [editComments, setEditComments] = useState(commentVal)
 
 
@@ -29,11 +28,10 @@ function ModalShowRecipeDetails({clickedRecipe}) {
         setEditComments(e.target.value)
     }
 
-
 // INGREDIENT HANDLESAVECLICK
     function handleIngredientSaveClick (e) {
         e.preventDefault()
-
+        //THIS MAKES IT INTO AN ARRAY
         const newIngredientsArray = editIngredientValue.split("\n")
         console.log(newIngredientsArray)
 
@@ -64,9 +62,7 @@ function ModalShowRecipeDetails({clickedRecipe}) {
     }
 
     
-
 // DIRECTIONS HANDLESAVECLICK
-
 function handleDirectionsSaveClick (e) {
     e.preventDefault()
 
