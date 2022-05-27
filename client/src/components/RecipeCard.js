@@ -21,7 +21,6 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
     function handleEditClick () {
       console.log(recipe)
       setClickedRecipe(recipe)
-      console.log(recipe.instructions)
     }
 
   return (
@@ -35,8 +34,8 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
             >
                 <div className="taskInformation">
                     <p>{recipe.recipe_name}</p>
-                        <div className="secondary-details">
-                        <p>{recipe.recipe_name}</p>
+                      <div className={`secondary-details ${recipe.categories}`}>
+                        <p>{recipe.categories}</p>
                         </div>
                     <div className="closeButton">
                     <RiDeleteBin2Fill

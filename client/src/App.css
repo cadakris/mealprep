@@ -17,7 +17,6 @@
 /* LOGIN / SIGNUP ---------------------------------------------------------> */
 
 .fuckingwork {
-
   background: rgb(0,73,191);
   background: linear-gradient(90deg, rgba(0,73,191,1) 0%, rgba(190,190,255,1) 46%, rgba(0,212,255,1) 100%);
   color: var(--text-color);
@@ -204,7 +203,8 @@ button.ghost {
   transform: translateX(20%);
 }
 
-/* NEW NEW DRAGGABLES AND CARDS----------------------------------------------------> */
+/* COLUMN DRAG AND DROP
+----------------------------------------------------> */
 .column-container {
   display: flex;
 }
@@ -235,7 +235,7 @@ button.ghost {
   margin-right: 45px;
 }
 
-/* TASKCARD new drag and drop----------------------------------------------------> */
+/* RECIPECARD DETAILS ----------------------------------------------------> */
 .taskInformation {
   display: flex;
   flex-direction: column;
@@ -260,6 +260,22 @@ button.ghost {
   font-weight: 400px;
   color: #7d7d7d;
 } 
+
+.Breakfast {
+  background-color: lime;
+}
+
+.Lunch {
+  background-color: yellow;
+} 
+
+.Dinner {
+  background-color: coral;
+} 
+
+.Snack {
+  background-color: rgb(108, 108, 172);
+}
 
 /* MODAL */
 .modal {

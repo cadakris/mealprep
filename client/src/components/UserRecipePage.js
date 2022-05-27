@@ -9,7 +9,8 @@ const defaultFormState = {
       recipe_name: "",
       ingredients: "",
       instructions: "",
-      comment: ""
+      comment: "",
+      categories: ""
     }
 
 function UserRecipePage({setUser, user}) {
@@ -32,7 +33,8 @@ function UserRecipePage({setUser, user}) {
         recipe_name: formData.recipe_name,
         ingredients: [formData.ingredients],
         instructions: new Array(formData.instructions),
-        comment: formData.comment
+        comment: formData.comment,
+        categories: formData.categories
       }),
     })
     .then((res) => res.json())
@@ -175,6 +177,18 @@ function handleChange (e) {
         onChange={handleChange}
         value={formData.comment}
       ></textarea>  
+    <label>Category</label>
+      <select
+        defaultValue="Breakfast"
+        name="categories"
+        onChange={handleChange}
+        value={formData.categories}
+      >
+        <option name="categories">Breakfast</option>
+        <option name="categories">Lunch</option>
+        <option name="categories">Dinner</option>
+        <option name="categories">Snack</option>
+      </select>
       <button>ADD</button>
   </form>
 </div>
@@ -192,7 +206,7 @@ function handleChange (e) {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                <h1 className="columnTitle"> {column.title_day} </h1>
+                <h1 className="columnTitle"> {column.title_day} </h1> 
                 {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
                 {column?.recipes?.map((recipe, index) => (
                   <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
