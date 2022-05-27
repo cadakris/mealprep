@@ -37,11 +37,8 @@ class RecipesController < ApplicationController
 
 #UPDATE / 
     def update
-        
-        
         updatedRecipe = @recipe.update!(recipe_params)
         render json: updatedRecipe, status: :ok
-        
     end
 
 

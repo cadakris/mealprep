@@ -21,7 +21,6 @@ class MealRecipeDaysController < ApplicationController
 
     # def update
     #     mealRecipeDay = MealRecipeDay.find_by(id: params[:id])
-    #     mealRecipeDay.update(params.permit(:day_id, :recipe_id))
     #     render json: mealRecipeDay
     # end
 

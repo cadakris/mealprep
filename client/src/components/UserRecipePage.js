@@ -107,7 +107,8 @@ function handleChange (e) {
       })
       // console.log("new state of column days:", columnDays)
       // console.log("day_id:", destColumn)
-      // console.log(`/recipes/${result.draggableId}`)
+      console.log("recipe",result.draggableId)
+      console.log("day_id", destColumn.id)
 
       fetch(`/meal_recipe_days/${result.draggableId}`, {
         method: "PATCH",
