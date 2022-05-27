@@ -61,6 +61,7 @@ const errorsToDisplay = error === null ? null : error;
             <h1 className="whiteSide">Sign In</h1>
             <label>Username</label>
             <input
+                className="loginsignupinput"
                 type="text"
                 name="username"
                 value={formData.username}
@@ -69,12 +70,13 @@ const errorsToDisplay = error === null ? null : error;
 
             <label>Password</label>
             <input
+              className="loginsignupinput"
                 type="text"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
             ></input>
-            <button>Log In</button>
+            <button className="landingPageButton">Log In</button>
             <span className="errorMessage">{errorsToDisplay}</span>
         </form>
     </>

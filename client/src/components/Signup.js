@@ -68,6 +68,7 @@ const errorsToDisplay = errors === null ? null : errors[0];
             <h1 className="whiteSide">Create Account</h1>
                 <label> Name: </label>
                     <input
+                        className="loginsignupinput"
                         type="text"
                         name="full_name"
                         value={formData.full_name}
@@ -75,6 +76,7 @@ const errorsToDisplay = errors === null ? null : errors[0];
                     ></input>
                 <label> Username: </label>
                     <input
+                        className="loginsignupinput"
                         type="text"
                         name="username"
                         value={formData.username}
@@ -82,6 +84,7 @@ const errorsToDisplay = errors === null ? null : errors[0];
                     ></input>
                 <label> Email Address: </label>
                     <input
+                        className="loginsignupinput"
                         type="text"
                         name="email_address"
                         value={formData.email_address}
@@ -89,6 +92,7 @@ const errorsToDisplay = errors === null ? null : errors[0];
                     ></input>
                 <label> Password: </label>
                     <input
+                        className="loginsignupinput"
                         type="text"
                         name="password"
                         value={formData.password}
@@ -96,12 +100,13 @@ const errorsToDisplay = errors === null ? null : errors[0];
                     ></input>
                 <label> Confirm Password: </label>
                     <input
+                        className="loginsignupinput"
                         type="text"
                         name="password_confirmation"
                         value={formData.password_confirmation}
                         onChange={handleChange}
                     ></input>              
-            <button onClick={handleSignUpButton}>Submit!</button>
+            <button className="landingPageButton" onClick={handleSignUpButton}>Submit!</button>
             <span className="errorMessage">{errorsToDisplay}</span>
         </form>
     </>
