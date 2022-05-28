@@ -11,10 +11,53 @@
 }
 
 /* NAV BAR---------------------------------------------------------> */
-.btn{
-  color:rgba(16, 149, 125, 0.15)
+.navbarContainer {
+  /* background-color: #ff4b2b; */
+  border-bottom: solid black;
+  /* background: rgb(0,73,191); */
+  background: linear-gradient(90deg, rgba(255, 75, 43,1) 20%, rgba(43, 117, 255	
+  ,1) 100%);
 }
 
+.linkContainer {
+  margin-left: 55%;
+}
+
+li { 
+  display: table-cell; 
+  padding: 30px 0;
+}
+
+.btnstyle {
+  color: black;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+  border: none;
+  opacity: .6;
+  font-weight: bold;
+
+}
+
+.btnstyle:after {    
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: black;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.btnstyle:hover:after { 
+  width: 100%; 
+  left: 0; 
+}
 /* LOGIN / SIGNUP ---------------------------------------------------------> */
 .bodyContainer {
   min-height: 100%;
@@ -222,7 +265,38 @@ button.ghost {
 ----------------------------------------------------> */
 .column-container {
   display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+
 }
+
+/*SIZING OF THE SCROLLBAR*/
+.dayScroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+/*TRACKING AREA*/
+.dayScroll::-webkit-scrollbar-track {
+  background: #00000026;
+  opacity:.05;
+  border-radius: 20px; 
+}
+
+.dayScroll::-webkit-scrollbar-button {
+  display: block;
+  height: 4px;
+  width: 20px;
+}
+
+/*THIS STYLES THE THING THAT*/
+.dayScroll::-webkit-scrollbar-thumb {
+  background-color: #7d7d7d;
+  opacity: .1;
+  border-radius: 20px; 
+}  
+
 
 .columnDays {
   margin: 8px;
@@ -393,7 +467,8 @@ textarea {
 ----------------------------------------------------> */
 
 footer {
-  background-color: #ff4b2b;
+  background: linear-gradient(90deg, rgba(255, 75, 43,1) 20%, rgba(43, 117, 255	
+  ,1) 100%);
   background-position: bottom;
   height: 3rem;
   display: flex;
@@ -425,4 +500,10 @@ a:after {
 a:hover:after { 
   width: 100%; 
   left: 0; 
+}
+
+/* RECIPE FORM CONTAINER
+----------------------------------------------------> */
+.recipeFormContainer {
+  margin-top: 50px;
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect,  } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import ModalShowRecipeDetails from './ModalShowRecipeDetails';
 import RecipeCard from './RecipeCard';
-import  './UserRecipePage.css'
 
 //DEFAULT FORM INFORMATION TO PLUG INTO STATE FOR THE FORM
 const defaultFormState = {
@@ -12,7 +11,7 @@ const defaultFormState = {
       comment: "",
       categories: ""
     }
-
+ 
 function UserRecipePage({setUser, user}) {
 //set columndays gets the data - title, description, the columns etc. 
   const [columnDays, setColumnDays] = useState({})
@@ -144,7 +143,7 @@ function handleChange (e) {
 //START OF THE RETURN
   return (
 <>
-<div>
+<div className="recipeFormContainer">
   <form onSubmit={handleFormSubmit}>
     <label>Recipe Name</label>
       <input className="addRecipe"
@@ -194,7 +193,7 @@ function handleChange (e) {
 </div>
 
 <DragDropContext onDragEnd={result => onDragEnd(result, columnDays, setColumnDays )}>
-  <div className="column-container">
+  <div className="column-container dayScroll">
     <div className="columnDays">
       {Object.entries(columnDays).map(([columnId, column], index) => {
         return ( 
@@ -206,13 +205,14 @@ function handleChange (e) {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                <h1 className="columnTitle"> {column.title_day} </h1> 
+                <h1 className="columnTitle"> {column.title_day} </h1>
                 {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
                 {column?.recipes?.map((recipe, index) => (
                   <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
                   />
                 ))}
                 {provided.placeholder}
+                <button>Add Card</button>
               </div>
             )}
           </Droppable>

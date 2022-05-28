@@ -11,8 +11,6 @@ function Navbar({setUser}) {
       fetch("/logout", { method: "DELETE" }).then((r) => {
         if (r.ok) {
           setUser(null);
-          console.log(r);
-          console.log("loggedout")
         }
         navigate("/");
       });
@@ -22,9 +20,17 @@ function Navbar({setUser}) {
     <>
         <div className="navbarContainer">
           <div className="linkContainer">
-          <button onClick={handleLogoutClick} className="btn">
-            Logout
-          </button>
+          <ul>
+            <li>
+              <button className="btnstyle" onClick={() => navigate("/user-recipe-page")}>My Recipes</button>
+            </li>
+            <li>
+              <button className="btnstyle" >My Profile</button>
+            </li>
+            <li>
+              <button className="btnstyle"  onClick={handleLogoutClick}>Logout</button>
+            </li>
+          </ul>
           </div>
         </div>
     </>

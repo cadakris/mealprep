@@ -1,16 +1,26 @@
-5/17
-- Do tutorial on drag and drop
-- Figure out authentication 
+RECIPE / MEAL PREP WORK
 
-5/18
-- Work on implementing drag and drop with your data
-- Finish Authentication
-- Create known components
-- Build simple login page
+x - Read about drag and drop library
+x - User authentication 
+x - Work on implementing drag and drop with your data
+x - Build login page
+x - Finish CRUD
+x - Style login page
+x - Icorporate breakfast, lunch, dinner, snack categories
 
+- Figure out active storage
+- Style user recipe page
+- Create profile page
+- Duplicate Recipe
+- Style the actual recipe adding page
 
-5/19
-- Work on full CRUD
+BUGS TO FIX
+
+- Modal for add recipe page
+x - Need scroll on the columns 5/28
+- Fix when you have to move the index and it persists
+- Fix columns being dynamic
+
 
 
 
