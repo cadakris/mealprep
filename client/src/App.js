@@ -5,6 +5,7 @@ import './index.css'
 import LandingPage from './components/LandingPage'
 import UserRecipePage from './components/UserRecipePage'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import './App.css'
 
 function App() {
@@ -30,8 +31,6 @@ function App() {
   return (
 <>
 
-
-
 <BrowserRouter>
     {user ? (
       <Navbar user={user} setUser={setUser}/>
@@ -49,10 +48,10 @@ function App() {
         element={
         <LandingPage setUser={setUser}/>}
       ></Route>
-      
     )}
   </Routes>
 </BrowserRouter>
+<Footer />
 </>
   )
 }

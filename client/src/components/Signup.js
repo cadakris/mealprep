@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { FaEyeSlash, FaEye} from "react-icons/fa"
 
 const defaultFormState = {
     full_name:"",
@@ -13,8 +14,17 @@ function Signup({setUser}) {
 
 const [formData, setFormData] = useState (defaultFormState)
 const [errors, setErrors] = useState(null);
+const [showPassword, setShowPassword] = useState(false)
 
 const navigate = useNavigate();
+
+const passwordShownIcon = showPassword === true ? <FaEye size={16} /> : <FaEyeSlash size={16} />;
+
+function togglePassword(e) {
+    console.log("clicked")
+    e.preventDefault();
+    setShowPassword(!showPassword)
+}
 
 function handleChange (e) {
     setFormData ({
@@ -93,19 +103,22 @@ const errorsToDisplay = errors === null ? null : errors[0];
                 <label> Password: </label>
                     <input
                         className="loginsignupinput"
-                        type="text"
+                        type={showPassword ? 'text' : 'password'}
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
                     ></input>
-                <label> Confirm Password: </label>
+                {/* <label> Confirm Password: </label>
                     <input
                         className="loginsignupinput"
-                        type="text"
+                        type={showPassword ? 'text' : 'password'}
                         name="password_confirmation"
                         value={formData.password_confirmation}
                         onChange={handleChange}
-                    ></input>              
+                    ></input>      */}
+
+            <button className="icon" onClick={(e) => togglePassword(e)}>            {passwordShownIcon} </button>
+      
             <button className="landingPageButton" onClick={handleSignUpButton}>Submit!</button>
             <span className="errorMessage">{errorsToDisplay}</span>
         </form>

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import Signup from './Signup'
 import Login from './Login'
+import ServicesPage from './ServicesPage'
 
 function LandingPage({setUser}) {
 
@@ -15,6 +16,8 @@ function LandingPage({setUser}) {
     }
 
   return (
+      <>
+<div className="bodyContainer">
     <div className="ladingpagecontainer">
         <div className="container-mainforms" ref={changeClassName}>
             <div className="form-container login-container">
@@ -24,6 +27,9 @@ function LandingPage({setUser}) {
             <div className="form-container signup-container">
                 <Signup setUser={setUser}/>
             </div>
+
+
+
 
             <div className="overlay-container">
                 <div className="overlay">
@@ -42,6 +48,11 @@ function LandingPage({setUser}) {
             </div>
         </div>
     </div>
+    </div>
+    <div>
+    <ServicesPage/>
+    </div>
+    </>
   )
 }
 

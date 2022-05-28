@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+
+.grid-item1-service h1,.grid-item4-service h1{
+    color: #ff4b2b;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    letter-spacing: .05em;
+    text-align: center;
+    font-size: 40px;
+}
+
+.grid-item1-service p, .grid-item4-service p {
+    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    margin: 30px 55px 0;
+    text-align: justify;
+}
+
+.grid-item1-service {
+    grid-area: banner1text;
+    margin-top: 100px;
+    margin-left: 45px;
+}
+.grid-item2-service {
+    grid-area: banner1photo;
+    margin-top: 65px;
+    margin-right: 45px;
+}
+.grid-item3-service {
+    grid-area: banner2photo;
+    margin-top: 150px;
+    margin-left: 45px;
+}
+.grid-item4-service {
+    grid-area: banner2text;
+    margin-top: 150px;
+    margin-right: 45px;
+}
+
+.grid-container-services {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "banner1text banner1photo"
+        "banner1text banner1photo"
+        "banner1text banner1photo"
+        "banner2photo banner2text"
+        "banner2photo banner2text"
+        "banner2photo banner2text";
+}
+
+.digialRecipeImg {
+    width: 60%;
+    height: 90%;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.foodContainersImg {
+    width: 60%;
+    height: 100%;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    align-items: center;
+}
