@@ -7,6 +7,9 @@ x - Build login page
 x - Finish CRUD
 x - Style login page
 x - Icorporate breakfast, lunch, dinner, snack categories
+x - Fix columns being dynamic - DECIDED NOT TO DO THIS (Trello boards are not really dynamic)
+x - Put scroll on each invididual card 
+x - Need scroll on the columns 5/28
 
 - Figure out active storage
 - Style user recipe page
@@ -17,9 +20,7 @@ x - Icorporate breakfast, lunch, dinner, snack categories
 BUGS TO FIX
 
 - Modal for add recipe page
-x - Need scroll on the columns 5/28
 - Fix when you have to move the index and it persists
-- Fix columns being dynamic
 
 
 

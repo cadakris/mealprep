@@ -269,7 +269,6 @@ button.ghost {
   overflow-y: hidden;
   scroll-behavior: smooth;
   padding-bottom: 8px;
-
 }
 
 /*SIZING OF THE SCROLLBAR*/
@@ -302,7 +301,8 @@ button.ghost {
   margin: 8px;
   display: flex;
   width: 100%;
-  min-height: 80vh;
+  height: 600px;
+  /* min-height: 80vh; */
 }
 
 .columnTitle {
@@ -313,15 +313,78 @@ button.ghost {
   align-self: flex-start;
 }
 
+.taskListWrapper {
+  display: flex;
+}
+
 .taskList {
-  min-height: 100px;
   display: flex;
   flex-direction: column;
+  min-width: 275px;
+  margin-right: 45px;
+  width: 282px;
   background: #f3f3f3;
-  min-width: 341px;
   border-radius: 5px;
   padding: 15px 15px;
-  margin-right: 45px;
+  margin: 0 4px;
+  display: flex;
+  margin: 0 4px;
+  min-height: 20px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  /* height: 50%; */
+  /* min-height: 100px; */ 
+}
+
+.taskList::-webkit-scrollbar {
+  height: 1px;
+  width: 7px;
+}
+
+.taskList::-webkit-scrollbar-track {
+  background: #DEDEDE;
+  opacity:.05;
+  border-radius: 20px; 
+}
+
+.taskList::-webkit-scrollbar-button {
+  display: block;
+  height: 15px;
+  /* width: 1px; */
+}
+
+/*THIS STYLES THE THING THAT*/
+.taskList::-webkit-scrollbar-thumb {
+  background-color: #ABABAB;
+  opacity: .1;
+  border-radius: 20px; 
+}  
+
+
+.addRecipe {
+  border-radius: 3px;
+  box-shadow: none;
+  border: none;
+  overflow-wrap: break-word;
+  max-width: 290px;
+  max-height: 100px;
+  justify-content: center;
+}
+
+input.addRecipe {
+  width: 90%;
+  height: 35px;
+  margin-top: 10px;
+  padding-right: 50px;
+}
+
+.addIcon {
+  border: none;
+  background-color: #f3f3f3;
+  color: red;
+  padding-left: 4px;
 }
 
 /* RECIPECARD DETAILS ----------------------------------------------------> */
@@ -364,6 +427,10 @@ button.ghost {
 
 .Snack {
   background-color: rgb(108, 108, 172);
+}
+
+.addRecipe {
+
 }
 
 /* MODAL */
@@ -436,16 +503,16 @@ button.ghost {
   text-align: center;
 }
 
+/* CAN PROBBALY DELETE THIS*/
 /* text areq card*/
-
-input, textarea {
+/* input, textarea {
   background-color: transparent;
   border: 0;
   padding: 8px 16px;
   border-radius: 3px;
   font-size: 16px;
   border: 2px solid #161822;
-}
+} */
 
 input:hover {
   /* background-color: #161822; */

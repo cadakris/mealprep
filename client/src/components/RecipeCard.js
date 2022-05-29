@@ -27,12 +27,12 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
     <>
     <Draggable key={recipe.id} draggableId={recipe.id.toString()} index={index}>
         {provided =>(
-            <div
+            <div className="taskListContent"
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
             >
-                <div className="taskInformation">
+              <div className="taskInformation">
                     <p>{recipe.recipe_name}</p>
                       <div className={`secondary-details ${recipe.categories}`}>
                         <p>{recipe.categories}</p>

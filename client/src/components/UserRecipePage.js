@@ -1,7 +1,10 @@
 import React, { useState, useEffect,  } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import ModalShowRecipeDetails from './ModalShowRecipeDetails';
+import { GrAddCircle } from "react-icons/gr"
 import RecipeCard from './RecipeCard';
+
+
 
 //DEFAULT FORM INFORMATION TO PLUG INTO STATE FOR THE FORM
 const defaultFormState = {
@@ -143,7 +146,7 @@ function handleChange (e) {
 //START OF THE RETURN
   return (
 <>
-<div className="recipeFormContainer">
+{/* <div className="recipeFormContainer">
   <form onSubmit={handleFormSubmit}>
     <label>Recipe Name</label>
       <input className="addRecipe"
@@ -190,34 +193,72 @@ function handleChange (e) {
       </select>
       <button>ADD</button>
   </form>
-</div>
+</div> */}
 
 <DragDropContext onDragEnd={result => onDragEnd(result, columnDays, setColumnDays )}>
   <div className="column-container dayScroll">
     <div className="columnDays">
-      {Object.entries(columnDays).map(([columnId, column], index) => {
+      {Object.entries(columnDays).map(([columnId, column], index) => 
+      
+      { if (column.id === 1) {
         return ( 
           // console.log(columnId)
           // console.log(Object.entries(columnDays))
           <Droppable key={columnId} droppableId={columnId} columnDays={columnDays} setColumnDays={setColumnDays}>
             {(provided, snapshot) => (
-              <div className="taskList"
+              <div className="taskListWrapper">
+              <div className="taskList recipeScroll" id="RecipeDay"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
                 <h1 className="columnTitle"> {column.title_day} </h1>
-                {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
+                <form onSubmit={handleFormSubmit}>
+                      <input className="addRecipe"
+                      placeholder='Add Recipe Name'
+                        type="text"
+                        name="recipe_name"
+                        onChange={handleChange}
+                        value={formData.recipe_name}
+                        ></input>    
+                        <button className="addIcon"><GrAddCircle size={20} /></button>                     
+                  </form>   
+                    
+               {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
                 {column?.recipes?.map((recipe, index) => (
                   <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
                   />
                 ))}
                 {provided.placeholder}
-                <button>Add Card</button>
+              </div>
               </div>
             )}
           </Droppable>
         );
-      })}
+} else {
+  return ( 
+    // console.log(columnId)
+    // console.log(Object.entries(columnDays))
+    <Droppable key={columnId} droppableId={columnId} columnDays={columnDays} setColumnDays={setColumnDays}>
+      {(provided, snapshot) => (
+        <div className="taskListWrapper">
+          <div className="taskList recipeScroll"
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+        >
+          <h1 className="columnTitle"> {column.title_day} </h1>
+          {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
+          {column?.recipes?.map((recipe, index) => (
+            <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
+            />
+          ))}
+          {provided.placeholder}
+        </div>
+        </div>
+      )}
+    </Droppable>
+  )
+
+}})}
     </div>
   </div>
 </DragDropContext>
