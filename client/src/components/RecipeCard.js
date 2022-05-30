@@ -33,15 +33,17 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
                 {...provided.dragHandleProps}
             >
               <div className="taskInformation">
-                    <p>{recipe.recipe_name}</p>
+                    <h3 className="recipeNameOnCard">{" "}{recipe.recipe_name}{" "}</h3>
                       <div className={`secondary-details ${recipe.categories}`}>
-                        <p>{recipe.categories}</p>
+                        <p className="recipeCategory">{recipe.categories}</p>
                         </div>
-                    <div className="closeButton">
-                    <RiDeleteBin2Fill
+                    <div className="cardButtons">
+                    <RiDeleteBin2Fill className="recipeCardIcons"
+                        size={18}
                         onClick={handleDeleteClick}
                     />
-                    <FaEdit
+                    <FaEdit className="recipeCardIcons"
+                        size={18}
                         onClick={handleEditClick}
                     />
                 </div>

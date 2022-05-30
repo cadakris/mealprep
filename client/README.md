@@ -21,6 +21,7 @@ BUGS TO FIX
 
 - Modal for add recipe page
 - Fix when you have to move the index and it persists
+- style the cards 
 
 
 

@@ -1,7 +1,10 @@
 
 
 /* FONTS ---------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,800');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Raleway:wght@300;600&display=swap');
+
+
 
 /* GENERAL --------------------------------------------------------- */
 *{
@@ -20,12 +23,17 @@
 }
 
 .linkContainer {
-  margin-left: 55%;
+  margin-left: 80%;
+  margin-bottom: 12px;
+}
+
+ul {
+  padding-top: 5%;
 }
 
 li { 
   display: table-cell; 
-  padding: 30px 0;
+  padding: 5px 0;
 }
 
 .btnstyle {
@@ -298,65 +306,73 @@ button.ghost {
 
 
 .columnDays {
-  margin: 8px;
+  margin: 15px 8px;
   display: flex;
   width: 100%;
   height: 600px;
-  /* min-height: 80vh; */
 }
 
 .columnTitle {
   color: #10957d;
-  background: rgba(16, 149, 125, 0.15);
-  padding: 2px 10px;
-  border-radius: 5px;
-  align-self: flex-start;
+  background: #f3f3f3;
+  padding-top: 8px;
+  border-radius: 3px;
+
+}
+
+.columnTitleDiv {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* THIS NEEDS TO BE CHANGED TO TASTLISK*/
+.taskList {
+  display: flex;
+  flex-direction: column;
 }
 
 .taskListWrapper {
-  display: flex;
-}
-
-.taskList {
   display: flex;
   flex-direction: column;
   min-width: 275px;
   margin-right: 45px;
   width: 282px;
-  background: #f3f3f3;
-  border-radius: 5px;
-  padding: 15px 15px;
+  background: rgba(243, 243, 243,.6);
+  border-radius: 3px;
+  padding: 0 15px 15px 15px;
   margin: 0 4px;
   display: flex;
-  margin: 0 4px;
   min-height: 20px;
+
+  box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
 
   overflow-x: hidden;
   overflow-y: auto;
   scroll-behavior: smooth;
-  /* height: 50%; */
-  /* min-height: 100px; */ 
 }
 
-.taskList::-webkit-scrollbar {
+.taskListWrapper::-webkit-scrollbar {
   height: 1px;
   width: 7px;
 }
 
-.taskList::-webkit-scrollbar-track {
+.taskListWrapper::-webkit-scrollbar-track {
   background: #DEDEDE;
   opacity:.05;
   border-radius: 20px; 
 }
 
-.taskList::-webkit-scrollbar-button {
+.taskListWrapper::-webkit-scrollbar-button {
   display: block;
-  height: 15px;
+  height: 30px;
   /* width: 1px; */
 }
 
 /*THIS STYLES THE THING THAT*/
-.taskList::-webkit-scrollbar-thumb {
+.taskListWrapper::-webkit-scrollbar-thumb {
   background-color: #ABABAB;
   opacity: .1;
   border-radius: 20px; 
@@ -375,16 +391,31 @@ button.ghost {
 
 input.addRecipe {
   width: 90%;
-  height: 35px;
-  margin-top: 10px;
-  padding-right: 50px;
+  height: 40px;
+  margin-top: 12px;
+}
+
+input {
+  padding: 10px;
+}
+
+select.category {
+  width: 90%;
+  height: 40px;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  margin-top: 5px;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 }
 
 .addIcon {
   border: none;
-  background-color: #f3f3f3;
-  color: red;
-  padding-left: 4px;
+  background-color: rgba(243, 243, 243,.1);
+  padding-left: 3px;
 }
 
 /* RECIPECARD DETAILS ----------------------------------------------------> */
@@ -401,24 +432,24 @@ input.addRecipe {
     isDragging ? 'rgba(255, 59, 59, 0.15)' : 'white'}; */
   background: white;
   margin-top: 15px;
+
+  box-shadow: 0 14px 28px rgb(0 0 0 / 20%), 0 10px 10px rgb(0 0 0 / 15%);
 }
 
-.secondary-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  font-size: 12px;
-  font-weight: 400px;
-  color: #7d7d7d;
-} 
+.taskInformation p {
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  text-shadow: .5px .5px 12px rgba(0,0,0,0.5);
+}
 
 .Breakfast {
-  background-color: lime;
+  background-color: rgb(104, 251, 104);
+
 }
 
 .Lunch {
-  background-color: yellow;
+  background-color: rgb(246, 230, 139);
 } 
 
 .Dinner {
@@ -429,9 +460,26 @@ input.addRecipe {
   background-color: rgb(108, 108, 172);
 }
 
-.addRecipe {
-
+.recipeNameOnCard{
+  font-family: 'montserrat', sans-serif;
+  letter-spacing: .5px;
+  padding-bottom: 3px;
+  color: #172b4d;
+  font-weight: 400;
 }
+
+.cardButtons {
+  display: inline-block;
+  white-space: 20px;
+  padding-top: 5px;
+  padding-left: 150px;
+}
+
+.recipeCardIcons {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
 
 /* MODAL */
 .modal {

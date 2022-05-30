@@ -4,7 +4,7 @@ import ModalShowRecipeDetails from './ModalShowRecipeDetails';
 import { GrAddCircle } from "react-icons/gr"
 import RecipeCard from './RecipeCard';
 
-
+import "./UserRecipePage.css"
 
 //DEFAULT FORM INFORMATION TO PLUG INTO STATE FOR THE FORM
 const defaultFormState = {
@@ -60,6 +60,7 @@ function UserRecipePage({setUser, user}) {
         .then((res) => res.json())
         .then((arrOfDays) => setColumnDays(arrOfDays))
       })
+      setFormData(defaultFormState)
       }
     )}
 
@@ -113,6 +114,7 @@ function handleChange (e) {
       // console.log("day_id:", destColumn)
       console.log("recipe",result.draggableId)
       console.log("day_id", destColumn.id)
+      console.log(result)
 
       fetch(`/meal_recipe_days/${result.draggableId}`, {
         method: "PATCH",
@@ -127,74 +129,45 @@ function handleChange (e) {
 
     //THIS IS FOR WHEN WE ARE REARRANGING THE INDEX WITHIN THE COLUMN
     } else {
+      const destColumn = columnsDays[destination.droppableId]
       const column = columnsDays[source.droppableId]
-      const copiedItems = [...column.items]
+      const copiedItems = [...column.recipes]
       const [removed] = copiedItems.splice(source.index, 1)
       copiedItems.splice(destination.index, 0, removed)
       setColumnDays({
         ...columnsDays,
         [source.droppableId]: {
           ...column,
-          items: copiedItems,
+          recipes: copiedItems,
         },
       })
+      console.log("recipes from columndays", columnDays[`${destination.droppableId}`].recipes)
+      console.log("day_id", destColumn.id)
+      console.log("copieditems",copiedItems)
+// create fetch to save index
+  // fetch(`/days/${destColumn.id}`, {
+  //   method: "PATCH",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Accept: "application/json",
+  //   },
+  //   // body: JSON.stringify(`{"recipes": [${{copiedItems}}]`),
+  //   body: JSON.stringify({"recipes": `[{${copiedItems}}]`}),
+  // })
+  // .then((res) => res.json())
+  // .then((columnDaysNewIndex) => console.log('newIndexShit',columnDaysNewIndex))
+
     }
   }
 
   console.log("user: ", user)
   console.log("days user id: ", columnDays)
+
+
+
 //START OF THE RETURN
   return (
 <>
-{/* <div className="recipeFormContainer">
-  <form onSubmit={handleFormSubmit}>
-    <label>Recipe Name</label>
-      <input className="addRecipe"
-        type="text"
-        name="recipe_name"
-        onChange={handleChange}
-        value={formData.recipe_name}
-      ></input>
-    <label>Igredients</label>
-      <textarea 
-        className="addRecipe"
-        type="textarea"
-        name="ingredients"
-        onChange={handleChange}
-        value={formData.ingredients}
-      ></textarea>
-    <label>Instructions</label>
-      <textarea 
-        className="addRecipe"
-        type="textarea"
-        name="instructions"
-        onChange={handleChange}
-        value={formData.instructions}
-      ></textarea>
-    <label>Comments</label>
-      <textarea
-        className="addRecipe"
-        type="textarea"
-        name="comment"
-        onChange={handleChange}
-        value={formData.comment}
-      ></textarea>  
-    <label>Category</label>
-      <select
-        defaultValue="Breakfast"
-        name="categories"
-        onChange={handleChange}
-        value={formData.categories}
-      >
-        <option name="categories">Breakfast</option>
-        <option name="categories">Lunch</option>
-        <option name="categories">Dinner</option>
-        <option name="categories">Snack</option>
-      </select>
-      <button>ADD</button>
-  </form>
-</div> */}
-
 <DragDropContext onDragEnd={result => onDragEnd(result, columnDays, setColumnDays )}>
   <div className="column-container dayScroll">
     <div className="columnDays">
@@ -206,21 +179,31 @@ function handleChange (e) {
           // console.log(Object.entries(columnDays))
           <Droppable key={columnId} droppableId={columnId} columnDays={columnDays} setColumnDays={setColumnDays}>
             {(provided, snapshot) => (
-              <div className="taskListWrapper">
-              <div className="taskList recipeScroll" id="RecipeDay"
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                <h1 className="columnTitle"> {column.title_day} </h1>
+              <div className="taskListWrapper"
+              ref={provided.innerRef}
+              {...provided.droppableProps}>
+        <div className="columnTitleDiv"><h1 className="columnTitle"> {column.title_day} </h1></div>
+              <div className="taskList recipeScroll" id="RecipeDay">
                 <form onSubmit={handleFormSubmit}>
                       <input className="addRecipe"
-                      placeholder='Add Recipe Name'
+                        placeholder='Add Recipe Name'
                         type="text"
                         name="recipe_name"
                         onChange={handleChange}
                         value={formData.recipe_name}
                         ></input>    
-                        <button className="addIcon"><GrAddCircle size={20} /></button>                     
+                        <select className="category"
+                          defaultValue="Breakfast"
+                          name="categories"
+                          onChange={handleChange}
+                          value={formData.categories}
+                        >
+                          <option name="categories">Breakfast</option>
+                          <option name="categories">Lunch</option>
+                          <option name="categories">Dinner</option>
+                          <option name="categories">Snack</option>
+                        </select>                     
+                        <button className="addIcon"><GrAddCircle size={20} /></button>
                   </form>   
                     
                {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
@@ -230,7 +213,7 @@ function handleChange (e) {
                 ))}
                 {provided.placeholder}
               </div>
-              </div>
+              </div> 
             )}
           </Droppable>
         );
@@ -240,12 +223,13 @@ function handleChange (e) {
     // console.log(Object.entries(columnDays))
     <Droppable key={columnId} droppableId={columnId} columnDays={columnDays} setColumnDays={setColumnDays}>
       {(provided, snapshot) => (
-        <div className="taskListWrapper">
-          <div className="taskList recipeScroll"
-          ref={provided.innerRef}
-          {...provided.droppableProps}
+
+        <div className="taskListWrapper"
+        ref={provided.innerRef}
+        {...provided.droppableProps}
         >
-          <h1 className="columnTitle"> {column.title_day} </h1>
+        <div className="columnTitleDiv"><h1 className="columnTitle"> {column.title_day} </h1></div>
+          <div className="taskList recipeScroll">
           {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
           {column?.recipes?.map((recipe, index) => (
             <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
@@ -253,12 +237,14 @@ function handleChange (e) {
           ))}
           {provided.placeholder}
         </div>
+        {/* </div> */}
         </div>
       )}
     </Droppable>
   )
 
-}})}
+}
+})}
     </div>
   </div>
 </DragDropContext>

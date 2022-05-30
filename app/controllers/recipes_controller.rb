@@ -9,10 +9,8 @@ class RecipesController < ApplicationController
         render json: recipe
     end
 
-
 # GET / NOT FOR NESTED ROUTES
     def index
-       
         render json: Recipe.all
     end
 

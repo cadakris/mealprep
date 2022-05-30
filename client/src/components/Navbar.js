@@ -1,5 +1,8 @@
 import React from 'react'
 import { useNavigate, } from "react-router-dom";
+import { ImSpoonKnife } from "react-icons/im"
+import { CgProfile } from "react-icons/cg"
+import { FiLogOut } from "react-icons/fi"
 
 function Navbar({setUser}) {
 
@@ -22,13 +25,13 @@ function Navbar({setUser}) {
           <div className="linkContainer">
           <ul>
             <li>
-              <button className="btnstyle" onClick={() => navigate("/user-recipe-page")}>My Recipes</button>
+              <button className="btnstyle" onClick={() => navigate("/user-recipe-page")}><ImSpoonKnife/></button>
             </li>
             <li>
-              <button className="btnstyle" >My Profile</button>
+              <button className="btnstyle"><CgProfile/></button>
             </li>
             <li>
-              <button className="btnstyle"  onClick={handleLogoutClick}>Logout</button>
+              <button className="btnstyle"onClick={handleLogoutClick}><FiLogOut/></button>
             </li>
           </ul>
           </div>

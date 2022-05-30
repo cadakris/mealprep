@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :days, only: [:index, :show, :create, :update] do
+    resources :recipes, only: [:create, :show, :update]
+  end
+
   
     resources :recipes, only: [:create, :show, :update, :index] do 
       resources :days, only: [:index, :show, :create, :update]

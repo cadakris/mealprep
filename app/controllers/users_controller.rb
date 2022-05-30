@@ -15,6 +15,16 @@ class UsersController < ApplicationController
         render json: user
     end
 
+    def update
+        day = User.find_by!(id: sessions[:id])
+        if user
+            user.update(user_params)
+            render json: user
+        else
+            render json: { error: "Not Found"}, status: :not_found
+        end
+    end
+
 #POST 
     def create
         
