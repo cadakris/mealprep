@@ -20,7 +20,7 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
       }
 
     function handleEditClick () {
-      console.log(recipe)
+      console.log("Clicked Recipe",recipe.id)
       setClickedRecipe(recipe)
     }
 

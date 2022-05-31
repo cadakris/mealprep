@@ -21,6 +21,13 @@ function UserRecipePage({setUser, user}) {
   const [formData, setFormData] = useState(defaultFormState)
   const [clickedRecipe, setClickedRecipe] = useState(null)
 
+    // FETCH USER'S DAY OF THE WEEK
+    useEffect(() => {
+      fetch(`/users/${user.id}/days`)
+      .then((res) => res.json())
+      .then((arrOfDays) => setColumnDays(arrOfDays))
+    },[])
+
   //FORM POSTING
   function handleFormSubmit(e){
     e.preventDefault()
@@ -70,15 +77,13 @@ function handleChange (e) {
     ...formData, [e.target.name]: e.target.value,
   })
 }
-  // FETCH USER'S DAY OF THE WEEK
-  useEffect(() => {
-    fetch(`/users/${user.id}/days`)
-    .then((res) => res.json())
-    .then((arrOfDays) => setColumnDays(arrOfDays))
-  },[])
 
+//THIS IS TO CLOSE MODAL
+function closeModal() {
+  setClickedRecipe()
+}
   
-  //THIS IS THE DRAG AND DROP FUNCTIO
+  //THIS IS THE DRAG AND DROP FUNCTION
   const onDragEnd = (result, columnsDays, setColumnDays) => {
     console.log("columnDays:", columnDays)
     console.log("result:", result)
@@ -207,7 +212,7 @@ function handleChange (e) {
                         <button className="addIcon"><GrAddCircle size={20} /></button>                 
                   </form>   
                     
-               {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
+               {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} closeModal={closeModal}/> : null}
                 {column?.recipes?.map((recipe, index) => (
                   <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
                   />
@@ -231,7 +236,7 @@ function handleChange (e) {
         >
         <div className="columnTitleDiv"><h1 className="columnTitle"> {column.title_day} </h1></div>
           <div className="taskList recipeScroll">
-          {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
+          {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} closeModal={closeModal} /> : null}
           {column?.recipes?.map((recipe, index) => (
             <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
             />

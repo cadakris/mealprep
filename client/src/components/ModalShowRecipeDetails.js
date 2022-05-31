@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import Axios from 'axios'
-import { Image } from 'cloudinary-react'
-import axios from 'axios'
+import { GrClose } from "react-icons/gr"
 
-function ModalShowRecipeDetails({clickedRecipe}) {
+function ModalShowRecipeDetails({clickedRecipe, closeModal}) {
 
     const valIngredients = clickedRecipe.ingredients
     const valDirections = clickedRecipe.instructions
@@ -129,53 +128,56 @@ function handleDirectionsSaveClick (e) {
     <div className="modal-background-mask">
         <div className="modal">
             <div className="contentWrapper scroll">
+            <button onClick={closeModal}><GrClose/></button>
                 <div className="grid-container">
                     <div className="grid-item1">
                         <p>{clickedRecipe.recipe_name}</p>
+                        <input
+                          type="file"
+                          onChange={(e) => {
+                              uploadImage(e.target.files)}}
+                        ></input>  
                     </div>
                         <div className="grid-item2">
-                            <label>INGREDIENTS</label>
-                            <textarea
+                            <div><label>INGREDIENTS</label></div>
+                            <div><textarea
                                 value={editIngredientValue}
                                 rows={25}
                                 onChange={onIngredientChange}
                                 onKeyDown={onKeyDown}
-                            ></textarea>
+                            ></textarea></div>
 
                             <button onClick={handleIngredientSaveClick}>Save</button>
                         </div>
 
                     <div className="grid-item3">
-                        <label>DIRECTIONS</label>
-                            <textarea
+                        <div><label>DIRECTIONS</label></div>
+                            <div><textarea
                                 value={editDirectionsValue}
                                 rows={25}
                                 onChange={onDirectionsChange}
                                 onKeyDown={onKeyDown}
-                            ></textarea>
+                            ></textarea></div>
                         <button onClick={handleDirectionsSaveClick}>Save</button>
                     </div>
 
                     <div className="grid-item4">
-                        <label>COMMENTS</label>
-                            <textarea
+                        <div><label>COMMENTS</label></div>
+                            <div><textarea
                                 value={editComments}
                                 rows={25}
                                 onChange={onCommentChange}
                                 onKeyDown={onKeyDown}
-                            ></textarea>
+                            ></textarea></div>
                         <button onClick={handleCommentsSaveClick}>Save</button>
-                        <input
-                          type="file"
-                          onChange={(e) => {
-                              uploadImage(e.target.files)}}
-                        ></input>   
-                        <button onClick={submittingImage}> Upload An Image</button> 
-
-                        <div className="displayImage">
-                            <img src={clickedRecipe.image_url}></img>
-                        </div>
                     </div>
+
+                    <div className="grid-item5">
+                        <button onClick={submittingImage}> Upload An Image</button> 
+                            <div className="modalImgContainer">
+                                <img src={clickedRecipe.image_url}></img>
+                            </div>
+                    </div> 
                 </div>
             </div>
         </div>      
