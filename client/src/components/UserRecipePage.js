@@ -137,6 +137,7 @@ function closeModal() {
       const destColumn = columnsDays[destination.droppableId]
       const column = columnsDays[source.droppableId]
       const copiedItems = [...column.recipes]
+      const copiedMealRecipeDays = [...column.meal_recipe_days]
       const [removed] = copiedItems.splice(source.index, 1)
       copiedItems.splice(destination.index, 0, removed)
       setColumnDays({
@@ -149,18 +150,20 @@ function closeModal() {
       console.log("recipes from columndays", columnDays[`${destination.droppableId}`].recipes)
       console.log("day_id", destColumn.id)
       console.log("copieditems",copiedItems)
+      console.log("column",column)
+
 // create fetch to save index
-  // fetch(`/days/${destColumn.id}`, {
-  //   method: "PATCH",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Accept: "application/json",
-  //   },
-  //   // body: JSON.stringify(`{"recipes": [${{copiedItems}}]`),
-  //   body: JSON.stringify({"recipes": `[{${copiedItems}}]`}),
-  // })
-  // .then((res) => res.json())
-  // .then((columnDaysNewIndex) => console.log('newIndexShit',columnDaysNewIndex))
+  fetch(`/days/${destColumn.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    // body: JSON.stringify(`{"recipes": [${{copiedItems}}]`),
+    body: JSON.stringify({"meal_recipe_days": `${copiedMealRecipeDays}}]`}),
+  })
+  .then((res) => res.json())
+  .then((columnDaysNewIndex) => console.log('newIndexShit',columnDaysNewIndex))
 
     }
   }

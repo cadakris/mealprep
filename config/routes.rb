@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :days, only: [:index, :show, :create, :update] do
-    resources :recipes, only: [:create, :show, :update]
+    resources :meal_recipe_days, only: [:index, :create, :show, :update]
   end
 
   
