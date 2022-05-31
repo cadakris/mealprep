@@ -1,4 +1,7 @@
-import React, { useState, useRef, useEffect} from 'react'
+import React, { useState } from 'react'
+import Axios from 'axios'
+import { Image } from 'cloudinary-react'
+import axios from 'axios'
 
 function ModalShowRecipeDetails({clickedRecipe}) {
 
@@ -6,13 +9,11 @@ function ModalShowRecipeDetails({clickedRecipe}) {
     const valDirections = clickedRecipe.instructions
     const commentVal = clickedRecipe.comment
 
-    
-
-    console.log("clicked recipe:",clickedRecipe)
-
     const [editIngredientValue, setEditIngredientValue] = useState(valIngredients.join("\n"))
     const [editDirectionsValue, setEditDirectionsValue] = useState(valDirections.join("\n"))
     const [editComments, setEditComments] = useState(commentVal)
+    const [imageSelected, setImageSelected] = useState("")
+    const [imageInfo, setImageInfo] = useState("")
 
 
 // HANDLE DIFFERENT ON CHANGES
@@ -91,18 +92,43 @@ function handleDirectionsSaveClick (e) {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
-            body: JSON.stringify({"comments": editComments}),
+            body: JSON.stringify({"comment": editComments}),
         })
         .then((res) => res.json())
         .then((newDirectionsArray) => {
             console.log()
         })}
 
+//UPLOAD PHOTO FROM CLOUDINARY // MAKING AXIOS POST REQUEST
+ const uploadImage = (files) => {
+     const formData = new FormData()
+     formData.append("file", files[0])
+     formData.append("upload_preset", "mafnci9q")
+
+    Axios.post("https://api.cloudinary.com/v1_1/dnr8dgxt2/image/upload", formData)
+    .then((imageData) => {
+        console.log("image url",imageData.data.url)
+        setImageInfo(imageData.data.url)
+    })
+ };
+
+ function submittingImage () {
+    fetch(`/recipes/${clickedRecipe.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json", 
+            Accept: "application/json",
+        },
+        body: JSON.stringify({image_url: imageInfo}),
+    })
+    .then ((res) => res.json())
+    .then((newImageUrlInfo) => setImageSelected(newImageUrlInfo))
+ }
 
   return (
     <div className="modal-background-mask">
         <div className="modal">
-            <div className="contentWrapper">
+            <div className="contentWrapper scroll">
                 <div className="grid-container">
                     <div className="grid-item1">
                         <p>{clickedRecipe.recipe_name}</p>
@@ -139,6 +165,16 @@ function handleDirectionsSaveClick (e) {
                                 onKeyDown={onKeyDown}
                             ></textarea>
                         <button onClick={handleCommentsSaveClick}>Save</button>
+                        <input
+                          type="file"
+                          onChange={(e) => {
+                              uploadImage(e.target.files)}}
+                        ></input>   
+                        <button onClick={submittingImage}> Upload An Image</button> 
+
+                        <div className="displayImage">
+                            <img src={clickedRecipe.image_url}></img>
+                        </div>
                     </div>
                 </div>
             </div>

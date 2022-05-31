@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2022_05_20_143528) do
     t.string "instructions", array: true
     t.string "categories"
     t.string "comment"
+    t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

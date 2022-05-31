@@ -29,7 +29,7 @@ def day_params
 end
 
 def recipe_params
-    params.permit(:recipe_name, :categories, :comment, instructions:[], ingredients:[])
+    params.permit(:recipe_name, :categories, :comment, :image_url, instructions:[], ingredients:[])
 end
 
 end

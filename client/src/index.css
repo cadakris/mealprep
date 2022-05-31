@@ -425,11 +425,9 @@ select.category {
   justify-content: center;
   align-items: flex-start;
   padding: 0 15px;
-  min-height: 106px;
+  min-height: 150px;
   border-radius: 5px;
   max-width: 311px;
-  /* background: ${({ isDragging }) =>
-    isDragging ? 'rgba(255, 59, 59, 0.15)' : 'white'}; */
   background: white;
   margin-top: 15px;
 
@@ -437,7 +435,7 @@ select.category {
 }
 
 .taskInformation p {
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'Poppins', sans-serif;
   color: white;
   text-shadow: .5px .5px 12px rgba(0,0,0,0.5);
@@ -445,7 +443,6 @@ select.category {
 
 .Breakfast {
   background-color: rgb(104, 251, 104);
-
 }
 
 .Lunch {
@@ -464,6 +461,7 @@ select.category {
   font-family: 'montserrat', sans-serif;
   letter-spacing: .5px;
   padding-bottom: 3px;
+  padding-top: 3px;
   color: #172b4d;
   font-weight: 400;
 }
@@ -472,12 +470,30 @@ select.category {
   display: inline-block;
   white-space: 20px;
   padding-top: 5px;
-  padding-left: 150px;
+  padding-left: 157px;
+  padding-bottom: 3px;
 }
 
 .recipeCardIcons {
-  margin-right: 8px;
+  margin-right: 10px;
   cursor: pointer;
+}
+
+/*Recipe Card Image*/
+.recipeCardImage {
+  float: left;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  justify-content: center;
+}
+
+.recipeCardImageContainer {
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5px;
+  padding-bottom: 3px;
 }
 
 
@@ -492,11 +508,16 @@ select.category {
   max-width: 100%;
   height: 700px;
   max-height: 100%;
-  /* animation: pop-swirl 0.5s; */
-  background-color: white;
+  background-color: #f4f5f7;
+
+  padding: 4px;
+  width: 700px;
+  height: 700px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* .modalContent.scroll {
+/* .modal.scroll {
   padding: 4px;
   width: 700px;
   height: 700px;
@@ -510,7 +531,7 @@ select.category {
   height: 100vh;
   top: 0;
   left: 0;
-  background: gray;
+  /* background: gray; */
 }
 
 
@@ -622,3 +643,4 @@ a:hover:after {
 .recipeFormContainer {
   margin-top: 50px;
 }
+

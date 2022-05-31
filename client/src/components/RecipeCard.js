@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Draggable } from "react-beautiful-dnd"
 import { RiDeleteBin2Fill } from "react-icons/ri"
 import { FaEdit } from "react-icons/fa"
 
 function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, clickedRecipe}) {
+
   
     function handleDeleteClick() {
         fetch(`/recipes/${recipe.id}`, {
@@ -36,6 +37,9 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
                     <h3 className="recipeNameOnCard">{" "}{recipe.recipe_name}{" "}</h3>
                       <div className={`secondary-details ${recipe.categories}`}>
                         <p className="recipeCategory">{recipe.categories}</p>
+                        </div>
+                        <div className="recipeCardImageContainer">
+                        <img className="recipeCardImage" src={recipe.image_url}></img>
                         </div>
                     <div className="cardButtons">
                     <RiDeleteBin2Fill className="recipeCardIcons"

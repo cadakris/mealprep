@@ -193,17 +193,18 @@ function handleChange (e) {
                         value={formData.recipe_name}
                         ></input>    
                         <select className="category"
-                          defaultValue="Breakfast"
+                          defaultValue="Choose Meal Category"
                           name="categories"
                           onChange={handleChange}
                           value={formData.categories}
                         >
+                          <option name="Choose_Category">Choose Category</option>
                           <option name="categories">Breakfast</option>
                           <option name="categories">Lunch</option>
                           <option name="categories">Dinner</option>
                           <option name="categories">Snack</option>
-                        </select>                     
-                        <button className="addIcon"><GrAddCircle size={20} /></button>
+                        </select>
+                        <button className="addIcon"><GrAddCircle size={20} /></button>                 
                   </form>   
                     
                {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} /> : null}
