@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import { GrClose } from "react-icons/gr"
 
-function ModalShowRecipeDetails({clickedRecipe, closeModal}) {
+function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays, setClickedRecipe}) {
 
     const valIngredients = clickedRecipe.ingredients
     const valDirections = clickedRecipe.instructions
@@ -11,8 +11,8 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal}) {
     const [editIngredientValue, setEditIngredientValue] = useState(valIngredients.join("\n"))
     const [editDirectionsValue, setEditDirectionsValue] = useState(valDirections.join("\n"))
     const [editComments, setEditComments] = useState(commentVal)
-    const [imageSelected, setImageSelected] = useState("")
     const [imageInfo, setImageInfo] = useState("")
+    const [imageSelected, setImageSelected] = useState('')
 
 
 // HANDLE DIFFERENT ON CHANGES
@@ -32,8 +32,8 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal}) {
     function handleIngredientSaveClick (e) {
         e.preventDefault()
         //THIS MAKES IT INTO AN ARRAY
-        const newIngredientsArray = editIngredientValue.split("\n")
-        console.log(newIngredientsArray)
+        
+        // console.log(newIngredientsArray)
 
         fetch(`/recipes/${clickedRecipe.id}`, {
             method: "PATCH",
@@ -41,12 +41,18 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal}) {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
-            body: JSON.stringify({"ingredients": newIngredientsArray}),
+            body: JSON.stringify({"ingredients": [editIngredientValue]}),
         })
         .then((res) => res.json())
-        .then((newIngredientsArray) => {
-            console.log(newIngredientsArray)
-        })}
+        .then((newIngredientsData) => {
+            setEditIngredientValue(newIngredientsData.ingredients)
+        })
+        .then(() => {
+            fetch(`/users/${user.id}/days`)
+        .then((res) => res.json())
+        .then((arrOfDays) => setColumnDays(arrOfDays))
+        })
+    }
 
 
     const onKeyDown = (e) => {
@@ -66,7 +72,8 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal}) {
 function handleDirectionsSaveClick (e) {
     e.preventDefault()
 
-    const newDirectionsArray = editDirectionsValue.split("\n")
+    const newDirectionsArray = editDirectionsValue?.split("\n")
+    console.log(clickedRecipe)
 
     fetch(`/recipes/${clickedRecipe.id}`, {
         method: "PATCH",
@@ -121,11 +128,18 @@ function handleDirectionsSaveClick (e) {
         body: JSON.stringify({image_url: imageInfo}),
     })
     .then ((res) => res.json())
-    .then((newImageUrlInfo) => setImageSelected(newImageUrlInfo))
+    .then((newImageUrlInfo) => {setImageSelected(newImageUrlInfo)})
+    .then(() => {
+        fetch(`/users/${user.id}/days`)
+        .then((res) => res.json())
+        .then((arrOfDays) => setColumnDays(arrOfDays))
+    })
  }
 
-  return (
-    <div className="modal-background-mask">
+ console.log('dfdfd', clickedRecipe)
+ 
+ return (
+     <div className="modal-background-mask">
         <div className="modal">
             <div className="contentWrapper scroll">
             <button onClick={closeModal}><GrClose/></button>
@@ -137,12 +151,14 @@ function handleDirectionsSaveClick (e) {
                           onChange={(e) => {
                               uploadImage(e.target.files)}}
                         ></input>  
+                        <div><button onClick={submittingImage}> Upload Selected Image</button></div>
                     </div>
                         <div className="grid-item2">
-                            <div><label>INGREDIENTS</label></div>
+                            <div><label className="containerLabel">INGREDIENTS</label></div>
                             <div><textarea
+                                className="longTextArea"
                                 value={editIngredientValue}
-                                rows={25}
+                                rows={30}
                                 onChange={onIngredientChange}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
@@ -151,10 +167,11 @@ function handleDirectionsSaveClick (e) {
                         </div>
 
                     <div className="grid-item3">
-                        <div><label>DIRECTIONS</label></div>
+                        <div><label className="containerLabel">DIRECTIONS</label></div>
                             <div><textarea
+                                className="longTextArea"
                                 value={editDirectionsValue}
-                                rows={25}
+                                rows={30}
                                 onChange={onDirectionsChange}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
@@ -162,10 +179,11 @@ function handleDirectionsSaveClick (e) {
                     </div>
 
                     <div className="grid-item4">
-                        <div><label>COMMENTS</label></div>
+                        <div><label className="containerLabel">COMMENTS</label></div>
                             <div><textarea
+                                className="commentTextArea"
                                 value={editComments}
-                                rows={25}
+                                rows={10}
                                 onChange={onCommentChange}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
@@ -173,9 +191,8 @@ function handleDirectionsSaveClick (e) {
                     </div>
 
                     <div className="grid-item5">
-                        <button onClick={submittingImage}> Upload An Image</button> 
                             <div className="modalImgContainer">
-                                <img src={clickedRecipe.image_url}></img>
+                                <img src={imageInfo? imageInfo : clickedRecipe.image_url }></img>
                             </div>
                     </div> 
                 </div>

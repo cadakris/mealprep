@@ -138,32 +138,36 @@ function closeModal() {
       const column = columnsDays[source.droppableId]
       const copiedItems = [...column.recipes]
       const copiedMealRecipeDays = [...column.meal_recipe_days]
+      const [remove] = copiedMealRecipeDays.splice(source.index, 1)
       const [removed] = copiedItems.splice(source.index, 1)
+      copiedMealRecipeDays.splice(destination.index, 0, remove)
       copiedItems.splice(destination.index, 0, removed)
       setColumnDays({
         ...columnsDays,
         [source.droppableId]: {
           ...column,
           recipes: copiedItems,
+          meal_recipe_days: copiedMealRecipeDays,
         },
       })
       console.log("recipes from columndays", columnDays[`${destination.droppableId}`].recipes)
       console.log("day_id", destColumn.id)
       console.log("copieditems",copiedItems)
+      console.log('copiedjointable', copiedMealRecipeDays)
       console.log("column",column)
 
 // create fetch to save index
-  fetch(`/days/${destColumn.id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    // body: JSON.stringify(`{"recipes": [${{copiedItems}}]`),
-    body: JSON.stringify({"meal_recipe_days": `${copiedMealRecipeDays}}]`}),
-  })
-  .then((res) => res.json())
-  .then((columnDaysNewIndex) => console.log('newIndexShit',columnDaysNewIndex))
+  // fetch(`/days/${destColumn.id}`, {
+  //   method: "PATCH",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Accept: "application/json",
+  //   },
+  //   // body: JSON.stringify(`{"recipes": [${{copiedItems}}]`),
+  //   body: JSON.stringify({"recipes": copiedItems, "meal_recipe_days": copiedMealRecipeDays}),
+  // })
+  // .then((res) => res.json())
+  // .then((columnDaysNewIndex) => console.log('newIndexShit',columnDaysNewIndex))
 
     }
   }
@@ -215,7 +219,7 @@ function closeModal() {
                         <button className="addIcon"><GrAddCircle size={20} /></button>                 
                   </form>   
                     
-               {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setColumnDays={setColumnDays} user={user} closeModal={closeModal}/> : null}
+               {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe} setColumnDays={setColumnDays} user={user} closeModal={closeModal}/> : null}
                 {column?.recipes?.map((recipe, index) => (
                   <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
                   />

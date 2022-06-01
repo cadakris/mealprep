@@ -465,7 +465,7 @@ select.category {
   display: inline-block;
   white-space: 20px;
   padding-top: 5px;
-  padding-left: 157px;
+  padding-left: 150px;
   padding-bottom: 3px;
 }
 
@@ -531,20 +531,25 @@ select.category {
 .grid-item2 {
   grid-area: ingredients;
   border: 1px solid black;
+  text-align: center;
 }
 
 .grid-item3 {
   grid-area: instructions;
   border: 1px solid black;
+  text-align: center;
 }
 
 .grid-item4 {
   grid-area: comments;
   border: 1px solid black;
+  text-align: center;
+  height: 16em;
 }
 
 .grid-item5 {
   grid-area: image;
+  text-align: center;
 }
 
 .grid-item5 img {
@@ -567,6 +572,12 @@ select.category {
   text-align: center;
 }
 
+label.containerLabel {
+  display: block;
+  text-align: center;
+  font-family: helvetica;
+}
+
 .grid-item5 .modalImgContainer {
   display:block;
   margin-left: auto;
@@ -574,31 +585,24 @@ select.category {
   align-items: center;
 }
 
-/* .grid-item1.modalImageContainer{
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
-}
-
-.grid-item1 img{
-  float: left;
-  width: 320px;
-  height: 250px;
-  object-fit: cover;
-} */
-
 input:hover {
   cursor: pointer;
 }
 
-textarea {
+.longTextArea {
   margin-top: 24px;
   resize: none;
   overflow: hidden;
-  min-height: 14px;
-  max-height: 800px;
+  width: 80%;
   font-size: 14px;
+  background-color: #dddddd;
+  border-radius: 5px;
+}
+
+.commentTextArea {
+  width: 80%;
+  resize: none;
+  overflow: hidden;
 }
 
 /*probably dont need code b*/
