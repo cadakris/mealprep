@@ -4,8 +4,6 @@ import ModalShowRecipeDetails from './ModalShowRecipeDetails';
 import { GrAddCircle } from "react-icons/gr"
 import RecipeCard from './RecipeCard';
 
-import "./UserRecipePage.css"
-
 //DEFAULT FORM INFORMATION TO PLUG INTO STATE FOR THE FORM
 const defaultFormState = {
       recipe_name: "",
@@ -180,6 +178,7 @@ function closeModal() {
 //START OF THE RETURN
   return (
 <>
+<div className="userRecipePageBackground">
 <DragDropContext onDragEnd={result => onDragEnd(result, columnDays, setColumnDays )}>
   <div className="column-container dayScroll">
     <div className="columnDays">
@@ -261,6 +260,7 @@ function closeModal() {
     </div>
   </div>
 </DragDropContext>
+</div>
 </>
   )
 }

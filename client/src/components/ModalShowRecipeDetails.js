@@ -32,8 +32,6 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays,
     function handleIngredientSaveClick (e) {
         e.preventDefault()
         //THIS MAKES IT INTO AN ARRAY
-        
-        // console.log(newIngredientsArray)
 
         fetch(`/recipes/${clickedRecipe.id}`, {
             method: "PATCH",
@@ -49,8 +47,8 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays,
         })
         .then(() => {
             fetch(`/users/${user.id}/days`)
-        .then((res) => res.json())
-        .then((arrOfDays) => setColumnDays(arrOfDays))
+            .then((res) => res.json())
+            .then((arrOfDays) => setColumnDays(arrOfDays))
         })
     }
 
@@ -72,21 +70,24 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays,
 function handleDirectionsSaveClick (e) {
     e.preventDefault()
 
-    const newDirectionsArray = editDirectionsValue?.split("\n")
-    console.log(clickedRecipe)
-
     fetch(`/recipes/${clickedRecipe.id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
         },
-        body: JSON.stringify({"instructions": newDirectionsArray}),
+        body: JSON.stringify({"instructions": [editDirectionsValue]}),
     })
     .then((res) => res.json())
-    .then((newDirectionsArray) => {
-        console.log(newDirectionsArray)
-    })}
+    .then((newDirectionsData) => {
+        setEditDirectionsValue(newDirectionsData.instructions)
+    })
+    .then(() => {
+        fetch(`/users/${user.id}/days`)
+        .then((res) => res.json())
+        .then((arrOfDays) => setColumnDays(arrOfDays))
+    })
+}
 
 // COMMENTS HANDLESAVECLICK
     function handleCommentsSaveClick (e) {
@@ -101,9 +102,15 @@ function handleDirectionsSaveClick (e) {
             body: JSON.stringify({"comment": editComments}),
         })
         .then((res) => res.json())
-        .then((newDirectionsArray) => {
-            console.log()
-        })}
+        .then((newCommentsData) => {
+            setEditComments(newCommentsData.comment)
+        })
+        .then(() => {
+            fetch(`/users/${user.id}/days`)
+            .then((res) => res.json())
+            .then((arrOfDays) => setColumnDays(arrOfDays))
+        })
+    }
 
 //UPLOAD PHOTO FROM CLOUDINARY // MAKING AXIOS POST REQUEST
  const uploadImage = (files) => {
@@ -142,28 +149,29 @@ function handleDirectionsSaveClick (e) {
      <div className="modal-background-mask">
         <div className="modal">
             <div className="contentWrapper scroll">
-            <button onClick={closeModal}><GrClose/></button>
+            <button className="closeModalButton" onClick={closeModal}><GrClose/></button>
                 <div className="grid-container">
                     <div className="grid-item1">
-                        <p>{clickedRecipe.recipe_name}</p>
+                        <h1>{clickedRecipe.recipe_name}</h1>
+                        <h4>Upload A Photo</h4>
                         <input
                           type="file"
                           onChange={(e) => {
                               uploadImage(e.target.files)}}
                         ></input>  
-                        <div><button onClick={submittingImage}> Upload Selected Image</button></div>
+                        <div><button className="modalButton" onClick={submittingImage}> Save Image</button></div>
                     </div>
                         <div className="grid-item2">
                             <div><label className="containerLabel">INGREDIENTS</label></div>
                             <div><textarea
                                 className="longTextArea"
                                 value={editIngredientValue}
-                                rows={30}
+                                rows={20}
                                 onChange={onIngredientChange}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
 
-                            <button onClick={handleIngredientSaveClick}>Save</button>
+                            <button className="modalButton" onClick={handleIngredientSaveClick}>Save</button>
                         </div>
 
                     <div className="grid-item3">
@@ -171,11 +179,11 @@ function handleDirectionsSaveClick (e) {
                             <div><textarea
                                 className="longTextArea"
                                 value={editDirectionsValue}
-                                rows={30}
+                                rows={20}
                                 onChange={onDirectionsChange}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
-                        <button onClick={handleDirectionsSaveClick}>Save</button>
+                        <button className="modalButton" onClick={handleDirectionsSaveClick}>Save</button>
                     </div>
 
                     <div className="grid-item4">
@@ -183,11 +191,11 @@ function handleDirectionsSaveClick (e) {
                             <div><textarea
                                 className="commentTextArea"
                                 value={editComments}
-                                rows={10}
+                                rows={6}
                                 onChange={onCommentChange}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
-                        <button onClick={handleCommentsSaveClick}>Save</button>
+                        <button className="modalButton" onClick={handleCommentsSaveClick}>Save</button>
                     </div>
 
                     <div className="grid-item5">

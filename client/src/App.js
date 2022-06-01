@@ -1,7 +1,7 @@
 import React, { useState, useEffect,  } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
-
+import ProfilePage from './components/ProfilePage'
 import LandingPage from './components/LandingPage'
 import UserRecipePage from './components/UserRecipePage'
 import Navbar from './components/Navbar'
@@ -38,10 +38,17 @@ function App() {
     }
   <Routes>
     {user ? (
+      <>
       <Route
       path="/user-recipe-page"
       element={<UserRecipePage setUser={setUser} user={user}/>}
       ></Route>
+
+      <Route
+      path="/profile"
+      element={<ProfilePage setUser={setUser} user={user}/>}
+      ></Route>
+      </>
     ) : (
       <Route
         path="/"
