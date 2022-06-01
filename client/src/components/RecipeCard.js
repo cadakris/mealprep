@@ -1,6 +1,8 @@
 import React from 'react'
 import { Draggable } from "react-beautiful-dnd"
-import { RiDeleteBin2Fill } from "react-icons/ri"
+import { RiDeleteBin2Fill, } from "react-icons/ri"
+import { GrDuplicate, } from "react-icons/gr";
+
 import { FaEdit } from "react-icons/fa"
 
 function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, clickedRecipe}) {
@@ -20,9 +22,50 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
       }
 
     function handleEditClick () {
-      console.log("Clicked Recipe",recipe.id)
+      console.log("Clicked Recipe",clickedRecipe)
       setClickedRecipe(recipe)
     }
+
+    function handleDuplicateClick () {
+      fetch(`/recipes`, {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        recipe_name: recipe.recipe_name,
+        ingredients: recipe.ingredients,
+        instructions: recipe.instructions,
+        comment: recipe.comment,
+        categories: recipe.categories,
+        image_url: recipe.image_url,
+      }),
+    })
+    .then((res) => res.json())
+    // .then((duplicateObj) => console.log("duplicate object",duplicateObj.id))
+    .then((duplicateObj) => {
+      fetch('/meal_recipe_days', {
+        method:"POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }, 
+        body: JSON.stringify({
+          recipe_id: duplicateObj.id,
+          day_id: user.days[0].id
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        fetch(`/users/${user.id}/days`)
+        .then((res) => res.json())
+        .then((completeDuplicateInfo) => setColumnDays(completeDuplicateInfo))
+      })
+    }
+    )
+  }
 
   return (
     <>
@@ -49,6 +92,10 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
                     <FaEdit className="recipeCardIcons"
                         size={18}
                         onClick={handleEditClick}
+                    />
+                    <GrDuplicate className="recipeCardIcons"
+                        size={18}
+                        onClick={handleDuplicateClick}
                     />
                 </div>
                 </div>

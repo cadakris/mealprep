@@ -19,7 +19,7 @@ function UserRecipePage({setUser, user}) {
   const [formData, setFormData] = useState(defaultFormState)
   const [clickedRecipe, setClickedRecipe] = useState(null)
 
-    // FETCH USER'S DAY OF THE WEEK
+// FETCH USER'S DAY OF THE WEEK
     useEffect(() => {
       fetch(`/users/${user.id}/days`)
       .then((res) => res.json())
@@ -184,9 +184,9 @@ function closeModal() {
     <div className="columnDays">
       {Object.entries(columnDays).map(([columnId, column], index) => 
       
-      { if (column.id === 1) {
+      { if (column.title_day === "Recipes") {
         return ( 
-          // console.log(columnId)
+          // console.log(columnId) 
           // console.log(Object.entries(columnDays))
           <Droppable key={columnId} droppableId={columnId} columnDays={columnDays} setColumnDays={setColumnDays}>
             {(provided, snapshot) => (

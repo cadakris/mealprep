@@ -44,6 +44,7 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays,
         .then((res) => res.json())
         .then((newIngredientsData) => {
             setEditIngredientValue(newIngredientsData.ingredients)
+            setClickedRecipe(newIngredientsData)
         })
         .then(() => {
             fetch(`/users/${user.id}/days`)
@@ -81,6 +82,7 @@ function handleDirectionsSaveClick (e) {
     .then((res) => res.json())
     .then((newDirectionsData) => {
         setEditDirectionsValue(newDirectionsData.instructions)
+
     })
     .then(() => {
         fetch(`/users/${user.id}/days`)

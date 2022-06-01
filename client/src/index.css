@@ -1,6 +1,6 @@
 /* FONTS ---------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,800');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Raleway:wght@300;600&family=Yantramanav:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Raleway:wght@300;600&family=Yantramanav:wght@300;400;600&display=swap');
 
 /* GENERAL --------------------------------------------------------- */
 *{
@@ -321,7 +321,8 @@ button.ghost {
   padding-top: 8px;
   border-radius: 3px;
   font-family: 'Yantramanav', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
+  font-size: 2em;
 }
 
 .columnTitleDiv {
