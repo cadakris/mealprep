@@ -72,6 +72,11 @@ function ProfilePage({user, setUser}) {
   return (
     <>
     <div className="profileContainerBackground">
+    <img
+        src="https://res.cloudinary.com/dnr8dgxt2/image/upload/v1654187881/images_rdccxl.png"
+        alt="cartoon cat"
+        className="userProfilePic"
+      ></img>
     {editModeOff ? (
             <div className="innerProfileInfo">
                     <div className="profileLabel">Name</div>

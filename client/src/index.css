@@ -782,3 +782,10 @@ a:hover:after {
   width: 400px;
   border-radius: 20px;
 }
+
+/* TOAST */
+.userProfilePic {
+  border-radius: 50%;
+  width:12%;
+  border:1px solid black;
+}

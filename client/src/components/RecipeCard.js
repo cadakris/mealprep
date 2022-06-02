@@ -64,9 +64,9 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
         .then((res) => res.json())
         .then((completeDuplicateInfo) => {
           setColumnDays(completeDuplicateInfo)})
-          onDuplicateClick()
-      })
 
+      })
+      onDuplicateClick()
       })
     
     
