@@ -3,6 +3,8 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import ModalShowRecipeDetails from './ModalShowRecipeDetails';
 import { GrAddCircle } from "react-icons/gr"
 import RecipeCard from './RecipeCard';
+import { ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //DEFAULT FORM INFORMATION TO PLUG INTO STATE FOR THE FORM
 const defaultFormState = {
@@ -66,6 +68,7 @@ function UserRecipePage({setUser, user}) {
         .then((arrOfDays) => setColumnDays(arrOfDays))
       })
       setFormData(defaultFormState)
+      notify()
       }
     )}
 
@@ -80,13 +83,17 @@ function handleChange (e) {
 function closeModal() {
   setClickedRecipe()
 }
+
+//THIS IS FOR THE TOAST
+  const notify = () => toast.dark ("Your recipe has been added!")
+
   
-  //THIS IS THE DRAG AND DROP FUNCTION
+//THIS IS THE DRAG AND DROP FUNCTION
   const onDragEnd = (result, columnsDays, setColumnDays) => {
     console.log("columnDays:", columnDays)
     console.log("result:", result)
     if (!result.destination) return
-    //destruction result into source ad destiation
+  //destruction result into source ad destiation
     const { source, destination} = result
     console.log('ID',result.draggableId)
     if (source.droppableId !== destination.droppableId) {
@@ -101,7 +108,7 @@ function closeModal() {
       console.log(`${destRecipes.id}`)
       const [removed] = sourceRecipes.splice(source.index, 1)
       destRecipes.splice(destination.index, 0, removed)
-      //THIS IS FOR WHEN WE CHANGE FROM COLUMN TO COLUMN. FIRST WE WANT TO 
+    //THIS IS FOR WHEN WE CHANGE FROM COLUMN TO COLUMN. FIRST WE WANT TO 
       setColumnDays({
         ...columnsDays,
         [source.droppableId]: {
@@ -219,7 +226,7 @@ function closeModal() {
                     
                {clickedRecipe ? <ModalShowRecipeDetails clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe} setColumnDays={setColumnDays} user={user} closeModal={closeModal}/> : null}
                 {column?.recipes?.map((recipe, index) => (
-                  <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe}
+                  <RecipeCard key={recipe.id} recipe={recipe} index={index} columnDays={columnDays} setColumnDays={setColumnDays} user={user} clickedRecipe={clickedRecipe} setClickedRecipe={setClickedRecipe} onDuplicateClick={notify}
                   />
                 ))}
                 {provided.placeholder}
@@ -259,6 +266,7 @@ function closeModal() {
     </div>
   </div>
 </DragDropContext>
+<ToastContainer autoClose={1500} position="bottom-center" toastClassName="modifiedToast" />
 </div>
 </>
   )

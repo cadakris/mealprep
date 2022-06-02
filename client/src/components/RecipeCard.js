@@ -5,7 +5,7 @@ import { GrDuplicate, } from "react-icons/gr";
 
 import { FaEdit } from "react-icons/fa"
 
-function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, clickedRecipe}) {
+function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, clickedRecipe, onDuplicateClick}) {
 
   
     function handleDeleteClick() {
@@ -28,8 +28,6 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
 
     function handleDuplicateClick () {
       // fetch(`meal_recipe_days/${recipe.id}`)
-
-
       fetch(`/recipes`, {
         method: "POST",
         headers: {
@@ -64,9 +62,11 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
       .then(() => {
          fetch(`/users/${user.id}/days`)
         .then((res) => res.json())
-        .then((completeDuplicateInfo) => setColumnDays(completeDuplicateInfo))
+        .then((completeDuplicateInfo) => {
+          setColumnDays(completeDuplicateInfo)})
+          onDuplicateClick()
       })
-       
+
       })
     
     

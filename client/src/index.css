@@ -767,3 +767,18 @@ a:hover:after {
   font-size: 1.2em;
   line-height: 1.5em;
 }
+
+/* TOAST */
+.modifiedToast {
+  font-family: 'Poppins', sans-serif !important;
+  background-color: rgb(72, 72, 72) !important;
+  text-align: center;
+  color: white !important;
+  /* font-style: italic; */
+  /* border: 1px solid maroon; */
+  /* border-radius: 25px !important; */
+  /* padding: 1em !important; */
+  font-weight: bold;
+  width: 400px;
+  border-radius: 20px;
+}
