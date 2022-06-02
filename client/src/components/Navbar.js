@@ -25,13 +25,13 @@ function Navbar({setUser}) {
           <div className="linkContainer">
           <ul>
             <li>
-              <button className="btnstyle" onClick={() => navigate("/user-recipe-page")}><ImSpoonKnife/></button>
+              <button className="btnstyle" onClick={() => navigate("/user-recipe-page")}><ImSpoonKnife size={20}/></button>
             </li>
             <li>
-              <button className="btnstyle"><CgProfile/></button>
+              <button className="btnstyle" onClick={() => navigate("/profile")}><CgProfile size={20}/></button>
             </li>
             <li>
-              <button className="btnstyle"onClick={handleLogoutClick}><FiLogOut/></button>
+              <button className="btnstyle"onClick={handleLogoutClick}><FiLogOut size={20}/></button>
             </li>
           </ul>
           </div>

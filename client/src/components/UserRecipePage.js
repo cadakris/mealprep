@@ -183,7 +183,6 @@ function closeModal() {
   <div className="column-container dayScroll">
     <div className="columnDays">
       {Object.entries(columnDays).map(([columnId, column], index) => 
-      
       { if (column.title_day === "Recipes") {
         return ( 
           // console.log(columnId) 

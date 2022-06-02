@@ -1,25 +1,25 @@
 class UsersController < ApplicationController
 
 #GET 
-    def show
-        user = User.find_by!(id: session[:user_id])
-        render json: user
-    end    
+def show
+    # if User authenticated, return user obj
+    current_user = User.find_by(id: session[:user_id])
+    if current_user
+      render json: current_user
+    else
+      render json: { error: 'Not authorized' }, status: :unauthorized
+    end
+  end  
 
     def index
         render json: User.all
     end
 
-    def getsuser
-        user = User.find_by!(id: params[:id])
-        render json: user
-    end
-
     def update
-        day = User.find_by!(id: sessions[:id])
-        if user
-            user.update(user_params)
-            render json: user
+        current_user = User.find_by!(id: session[:id])
+        if current_user
+            current_user.update!(user_params)
+            render json: current_user
         else
             render json: { error: "Not Found"}, status: :not_found
         end
@@ -45,14 +45,14 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.find_by(id: session[:user_id])
+        user = User.find_by!(id: session[:user_id])
         render json: user
     end
 
     private
 
     def user_params
-        params.permit(:full_name, :username, :password, :password_confirmation)
+        params.permit(:full_name, :username, :password, :password_confirmation, :bio, :image)
     end
 
 end

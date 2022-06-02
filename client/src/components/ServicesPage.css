@@ -32,6 +32,7 @@
     grid-area: banner2photo;
     margin-top: 150px;
     margin-left: 45px;
+    margin-bottom: 50px;
 }
 .grid-item4-service {
     grid-area: banner2text;

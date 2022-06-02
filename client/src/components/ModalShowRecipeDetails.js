@@ -44,7 +44,7 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays,
         .then((res) => res.json())
         .then((newIngredientsData) => {
             setEditIngredientValue(newIngredientsData.ingredients)
-            setClickedRecipe(newIngredientsData)
+            // setClickedRecipe(newIngredientsData)
         })
         .then(() => {
             fetch(`/users/${user.id}/days`)

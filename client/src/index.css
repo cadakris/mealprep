@@ -19,11 +19,11 @@
 
 .linkContainer {
   margin-left: 80%;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 ul {
-  padding-top: 5%;
+  padding-top: 10px;
 }
 
 li { 
@@ -271,7 +271,7 @@ button.ghost {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  min-height: 100vh;
+  min-height: 97vh;
 }
 
 .column-container {
@@ -294,6 +294,7 @@ button.ghost {
   border-radius: 20px; 
 }
 
+/*THIS STYLES THE BUTTON*/
 .dayScroll::-webkit-scrollbar-button {
   display: block;
   height: 4px;
@@ -323,6 +324,8 @@ button.ghost {
   font-family: 'Yantramanav', sans-serif;
   font-weight: 600;
   font-size: 2em;
+  color: #de9000;
+    text-shadow: -1px 1px 0 #de9000, 1px 1px 0 #de9000;
 }
 
 .columnTitleDiv {
@@ -475,7 +478,7 @@ select.category {
   display: inline-block;
   white-space: 20px;
   padding-top: 5px;
-  padding-left: 150px;
+  padding-left: 125px;
   padding-bottom: 3px;
 }
 
@@ -704,3 +707,63 @@ a:hover:after {
   margin-top: 50px;
 }
 
+
+/* RECIPE FORM CONTAINER
+---------------------------------------------------->
+*/
+
+.profileContainerBackground {
+  background-image: url("https://tallypress.com/wp-content/uploads/2019/01/baking.jpg");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 87vh;
+}
+
+.formContainer {
+  width: 400px;
+  height: 400px;
+  position:relative; 
+  margin-left: auto;
+  margin-right:auto;
+  display: block;
+  padding-bottom: 8px;
+  padding-top: 60px;
+}
+
+.userProfileInputBox{
+  width: 500px;
+  font-size: 1rem;
+  height: 2rem;
+  margin: 0 auto;
+  border: 1px solid #131313;
+  border-radius: 0;
+  padding-left: 0.5rem;
+  margin-bottom: 12px;
+}
+
+.profileButton {
+  border-radius: 20px;
+  border: 1px solid #ff4b2b;
+  background: #ff4b2b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  margin-top: 20px;
+}
+
+.innerProfileInfo {
+  margin-top: 40px;
+  font-size: 1.2em;
+  line-height: 1.5em;
+}

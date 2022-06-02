@@ -27,6 +27,9 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
     }
 
     function handleDuplicateClick () {
+      // fetch(`meal_recipe_days/${recipe.id}`)
+
+
       fetch(`/recipes`, {
         method: "POST",
         headers: {
@@ -57,14 +60,16 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
         })
       })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        fetch(`/users/${user.id}/days`)
+      .then((data) => console.log(data))
+      .then(() => {
+         fetch(`/users/${user.id}/days`)
         .then((res) => res.json())
         .then((completeDuplicateInfo) => setColumnDays(completeDuplicateInfo))
       })
-    }
-    )
+       
+      })
+    
+    
   }
 
   return (
@@ -82,9 +87,14 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
                         <p className="recipeCategory">{recipe.categories}</p>
                         </div>
                         <div className="recipeCardImageContainer">
-                        <img className="recipeCardImage" src={recipe.image_url}></img>
+                          {recipe.image_url?  <img className="recipeCardImage" src={recipe.image_url}></img> : null}
+                       
                         </div>
                     <div className="cardButtons">
+                    <GrDuplicate className="recipeCardIcons"
+                        size={17}
+                        onClick={handleDuplicateClick}
+                    />
                     <RiDeleteBin2Fill className="recipeCardIcons"
                         size={18}
                         onClick={handleDeleteClick}
@@ -92,10 +102,6 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
                     <FaEdit className="recipeCardIcons"
                         size={18}
                         onClick={handleEditClick}
-                    />
-                    <GrDuplicate className="recipeCardIcons"
-                        size={18}
-                        onClick={handleDuplicateClick}
                     />
                 </div>
                 </div>
