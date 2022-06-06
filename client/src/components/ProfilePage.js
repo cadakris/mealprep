@@ -36,8 +36,6 @@ function ProfilePage({user, setUser}) {
 
     function handleSubmit(e) {
         e.preventDefault()
-
-
     //UPDATE USER INFO
 
     fetch(`/users/${user.id}`, {
@@ -79,25 +77,13 @@ function ProfilePage({user, setUser}) {
       ></img>
     {editModeOff ? (
             <div className="innerProfileInfo">
-                    <div className="profileLabel">Name</div>
-                    <div className="rightSpanDiv">
-                    <span className="profileSpan">{user.name}</span>
-                    </div>
+                    <div className="profileLabel">Name: {defaultProfileForm.full_name}</div>
 
-                    <div className="profileLabel">Username</div>
-                    <div className="rightSpanDiv">
-                    <span className="profileSpan">{user.username}</span>
-                    </div>
+                    <div className="profileLabel">Username: {defaultProfileForm.username}</div>
 
-                    <span className="profileLabel">Email Address</span>
-                    <div className="rightSpanDiv">
-                    <span className="profileSpan">{user.email_address}</span>
-                    </div>
+                    <div className="profileLabel">Email Address: {defaultProfileForm.email_address}</div>
 
-                    <span className="profileLabel">Bio</span>
-                    <div className="rightSpanDiv">
-                    <span className="profileSpan">{user.bio}</span>
-                    </div>
+                    <div className="profileLabel">Bio: {defaultProfileForm.bio}</div>
 
                     <button onClick={(e) => handleClick(e)}className="profileButton">Edit Profile</button>
             </div>
