@@ -8,6 +8,8 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays,
     const valDirections = clickedRecipe.instructions
     const commentVal = clickedRecipe.comment
 
+    // const defaultIngredientFormEdit
+
     const [editIngredientValue, setEditIngredientValue] = useState(valIngredients.join("\n"))
     const [editDirectionsValue, setEditDirectionsValue] = useState(valDirections.join("\n"))
     const [editComments, setEditComments] = useState(commentVal)
@@ -162,6 +164,7 @@ function handleDirectionsSaveClick (e) {
                         ></input>  
                         <div><button className="modalButton" onClick={submittingImage}> Save Image</button></div>
                     </div>
+                        <form>
                         <div className="grid-item2">
                             <div><label className="containerLabel">INGREDIENTS</label></div>
                             <div><textarea
@@ -204,6 +207,7 @@ function handleDirectionsSaveClick (e) {
                                 <img src={imageInfo? imageInfo : clickedRecipe.image_url }></img>
                             </div>
                     </div> 
+                    </form>
                 </div>
             </div>
         </div>      
