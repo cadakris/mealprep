@@ -145,7 +145,6 @@ function handleDirectionsSaveClick (e) {
     })
  }
 
- console.log('dfdfd', clickedRecipe)
  
  return (
      <div className="modal-background-mask">

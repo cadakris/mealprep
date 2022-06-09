@@ -1,22 +1,22 @@
 class UsersController < ApplicationController
 
-#GET 
-def show
-    # if User authenticated, return user obj
-    current_user = User.find_by(id: session[:user_id])
-    if current_user
-      render json: current_user
-    else
-      render json: { error: 'Not authorized' }, status: :unauthorized
-    end
-  end  
+#GET # if User authenticated, return user obj
+# def show
+#     current_user = User.find_by(id: session[:user_id])
+#     if current_user
+#       render json: current_user
+#     else
+#       render json: { error: 'Not authorized' }, status: :unauthorized
+#     end
+#   end  
 
     def index
         render json: User.all
     end
 
+
     def update
-        current_user = User.find_by!(id: session[:id])
+        current_user = User.find_by!(id: session[:user_id])
         if current_user
             current_user.update!(user_params)
             render json: current_user
@@ -52,7 +52,7 @@ def show
     private
 
     def user_params
-        params.permit(:full_name, :username, :password, :password_confirmation, :bio, :image)
+        params.permit(:full_name, :username, :password, :password_confirmation, :bio, :image, :email_address)
     end
 
 end
