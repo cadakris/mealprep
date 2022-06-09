@@ -708,11 +708,11 @@ a:hover:after {
 }
 
 
-/* RECIPE FORM CONTAINER
+/* USER PFROFILE FORM CONTAINER
 ---------------------------------------------------->
 */
 
-.profileContainerBackground {
+.profileBackground {
   background-image: url("https://tallypress.com/wp-content/uploads/2019/01/baking.jpg");
   background-repeat: no-repeat;
   background-position: left;
@@ -724,12 +724,13 @@ a:hover:after {
   justify-content: center;
   align-items: center;
   height: 87vh;
+
 }
 
 .formContainer {
   width: 400px;
   height: 400px;
-  position:relative; 
+  position:flex; 
   margin-left: auto;
   margin-right:auto;
   display: block;
@@ -740,15 +741,21 @@ a:hover:after {
 .userProfileInputBox{
   width: 500px;
   font-size: 1rem;
-  height: 2rem;
+  height: 2.5rem;
   margin: 0 auto;
   border: 1px solid #131313;
   border-radius: 0;
   padding-left: 0.5rem;
   margin-bottom: 12px;
+  font-family: 'Poppins';
+  letter-spacing: .02em;
 }
 
-.profileButton {
+textarea.userProfileInputBox {
+  height: 5rem;
+}
+
+button.profileButton {
   border-radius: 20px;
   border: 1px solid #ff4b2b;
   background: #ff4b2b;
@@ -760,13 +767,53 @@ a:hover:after {
   text-transform: uppercase;
   transition: transform 80ms ease-in;
   margin-top: 20px;
+  text-align: center;
 }
 
 .innerProfileInfo {
   margin-top: 40px;
   font-size: 1.2em;
   line-height: 1.5em;
+  align-items: center;
+  justify-content: center;
 }
+
+.addPadding {
+  padding-right: 2em;
+  font-weight: 600;
+}
+
+.userProfilePic {
+  border-radius: 50%;
+  border:1px solid black;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+
+}
+
+table {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.chefHatImage {
+  width: 12%;
+}
+
+.profileLabelTest {
+  width: 10%;
+}
+
+.formContainer {
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonContainer {
+  text-align: center;
+}
+
 
 /* TOAST */
 .modifiedToast {
@@ -783,9 +830,3 @@ a:hover:after {
   border-radius: 20px;
 }
 
-/* TOAST */
-.userProfilePic {
-  border-radius: 50%;
-  width:12%;
-  border:1px solid black;
-}

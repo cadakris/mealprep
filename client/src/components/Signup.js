@@ -7,7 +7,8 @@ const defaultFormState = {
     username:"",
     email_address:"",
     password:"",
-    password_confirmation:""
+    password_confirmation:"",
+    image:"https://res.cloudinary.com/dnr8dgxt2/image/upload/v1654187881/images_rdccxl.png"
 }
 
 function Signup({setUser}) {

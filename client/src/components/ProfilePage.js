@@ -8,7 +8,7 @@ function ProfilePage({user, setUser}) {
         username: user.username,
         email_address:  user.email_address,
         bio: user.bio,
-        image:  "https://res.cloudinary.com/dnr8dgxt2/image/upload/v1654187881/images_rdccxl.png",
+        image:  user.image,
     }
 
     const [profileForm, setProfileForm] = useState({defaultProfileForm})
@@ -85,33 +85,53 @@ function ProfilePage({user, setUser}) {
 
   return (
     <>
-    <div className="profileContainerBackground">
+    <div className="profileBackground">
     <img
-        src=""
-        alt="Chef's Hat"
+        src={user.image}
+        alt={user.full_name}
         className="userProfilePic"
       ></img>
+
     {editModeOff ? (
+        <>
             <div className="innerProfileInfo">
-                    <div className="profileLabel">Name: {user.full_name}</div>
+                <table>
+                <tr>
+                    <td className="addPadding">Name:</td>
+                    <td>{user.full_name}</td>
+                </tr>
+                <tr>
+                    <td className="addPadding">Username:</td>
+                    <td>{user.username}</td>
+                </tr>
 
-                    <div className="profileLabel">Username: {user.username}</div>
+                <tr>
+                    <td className="addPadding">Email:</td>
+                    <td>{user.email_address}</td>
+                </tr>
 
-                    <div className="profileLabel">Email Address: {user.email_address}</div>
+                <tr>
+                    <td className="addPadding">Bio:</td>
+                    <td>{user.bio}</td>
+                </tr>
+                <tr>
 
-                    <div className="profileLabel">Bio: {user.bio}</div>
+                </tr>
+                </table>
 
-                    <button onClick={(e) => handleClick(e)}className="profileButton">Edit Profile</button>
             </div>
+            <button onClick={(e) => handleClick(e)}className="profileButton">Edit Profile</button>
+            </>
         ) : (
             <div className="formContainer">
              <input
                 type="file"
+                // value={profileForm.image}
+                // name="image"
                 onChange={(e) => {uploadImage(e.target.files)}}
             >
             </input>
             <form onSubmit={handleSubmit}>
-
                 <label className="userProfileLabel"> Name: </label>
                 <input
                     name="full_name"
@@ -142,9 +162,9 @@ function ProfilePage({user, setUser}) {
                     value={profileForm.bio}
                     onChange={(e) => handleChange(e)}
                     className="userProfileInputBox"
-                    rows={10}
+                    rows={30}
                 ></textarea>
-                <button className="profileButton">Submit</button>
+                <div className="buttonContainer"><button className="profileButton">Submit</button></div>
             </form>
             </div>
             )}
