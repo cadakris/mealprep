@@ -2,59 +2,53 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import { GrClose } from "react-icons/gr"
 
-function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays, setClickedRecipe}) {
+function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}) {
 
     const valIngredients = clickedRecipe.ingredients
     const valDirections = clickedRecipe.instructions
     const commentVal = clickedRecipe.comment
 
-    // const defaultIngredientFormEdit
+    const defaultIngredientFormEdit = {
+            ingredients: valIngredients.join("\n"),
+            instructions: valDirections.join("\n"),
+            comment: commentVal
+    }
 
-    const [editIngredientValue, setEditIngredientValue] = useState(valIngredients.join("\n"))
-    const [editDirectionsValue, setEditDirectionsValue] = useState(valDirections.join("\n"))
-    const [editComments, setEditComments] = useState(commentVal)
+    const [formData, setFormData] = useState(defaultIngredientFormEdit)
     const [imageInfo, setImageInfo] = useState("")
     const [imageSelected, setImageSelected] = useState('')
 
-
-// HANDLE DIFFERENT ON CHANGES
-    function onIngredientChange (e) {
-        setEditIngredientValue(e.target.value)
+//HANDLE ALL ONCHANGES
+    function handleFormChanges (e) {
+        setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    function onDirectionsChange (e) {
-        setEditDirectionsValue(e.target.value)
-    }
+// HANDLE ENTIRE SUBMIT FOR EACH CATEGORY 
+function handleRecipeFormSubmit (e) {
+    e.preventDefault()
 
-    function onCommentChange (e) {
-        setEditComments(e.target.value)
-    }
-
-// INGREDIENT HANDLESAVECLICK
-    function handleIngredientSaveClick (e) {
-        e.preventDefault()
-        //THIS MAKES IT INTO AN ARRAY
-
-        fetch(`/recipes/${clickedRecipe.id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify({"ingredients": [editIngredientValue]}),
+    fetch(`/recipes/${clickedRecipe.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        body: JSON.stringify({
+            ingredients: [formData.ingredients],
+            instructions: [formData.instructions],
+            comment: formData.comment
         })
+    })
+    .then((res) => res.json())
+    .then((updatedRecipeData) => {
+        setFormData(updatedRecipeData)
+    })
+    .then(() => {
+        fetch(`/users/${user.id}/days`)
         .then((res) => res.json())
-        .then((newIngredientsData) => {
-            setEditIngredientValue(newIngredientsData.ingredients)
-            // setClickedRecipe(newIngredientsData)
-        })
-        .then(() => {
-            fetch(`/users/${user.id}/days`)
-            .then((res) => res.json())
-            .then((arrOfDays) => setColumnDays(arrOfDays))
-        })
-    }
-
+        .then((arrOfDays) => setColumnDays(arrOfDays))
+    })
+}
 
     const onKeyDown = (e) => {
         const keyCode = e.which || e.keyCode;
@@ -68,53 +62,6 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays,
       } 
     }
 
-    
-// DIRECTIONS HANDLESAVECLICK
-function handleDirectionsSaveClick (e) {
-    e.preventDefault()
-
-    fetch(`/recipes/${clickedRecipe.id}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-        },
-        body: JSON.stringify({"instructions": [editDirectionsValue]}),
-    })
-    .then((res) => res.json())
-    .then((newDirectionsData) => {
-        setEditDirectionsValue(newDirectionsData.instructions)
-
-    })
-    .then(() => {
-        fetch(`/users/${user.id}/days`)
-        .then((res) => res.json())
-        .then((arrOfDays) => setColumnDays(arrOfDays))
-    })
-}
-
-// COMMENTS HANDLESAVECLICK
-    function handleCommentsSaveClick (e) {
-        e.preventDefault()
-    
-        fetch(`/recipes/${clickedRecipe.id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify({"comment": editComments}),
-        })
-        .then((res) => res.json())
-        .then((newCommentsData) => {
-            setEditComments(newCommentsData.comment)
-        })
-        .then(() => {
-            fetch(`/users/${user.id}/days`)
-            .then((res) => res.json())
-            .then((arrOfDays) => setColumnDays(arrOfDays))
-        })
-    }
 
 //UPLOAD PHOTO FROM CLOUDINARY // MAKING AXIOS POST REQUEST
  const uploadImage = (files) => {
@@ -155,7 +102,7 @@ function handleDirectionsSaveClick (e) {
             <button className="closeModalButton" onClick={closeModal}><GrClose/></button>
                 <div className="grid-container">
                     <div className="grid-item1">
-                        <h1>{clickedRecipe.recipe_name}</h1>
+                        <h1 contenteditable="true">{clickedRecipe.recipe_name}</h1>
                         <h4>Upload A Photo</h4>
                         <input
                           type="file"
@@ -164,42 +111,43 @@ function handleDirectionsSaveClick (e) {
                         ></input>  
                         <div><button className="modalButton" onClick={submittingImage}> Save Image</button></div>
                     </div>
-                        <form>
+                        <form onSubmit={handleRecipeFormSubmit}>
                         <div className="grid-item2">
                             <div><label className="containerLabel">INGREDIENTS</label></div>
                             <div><textarea
+                                name="ingredients"
                                 className="longTextArea"
-                                value={editIngredientValue}
+                                value={formData.ingredients}
                                 rows={20}
-                                onChange={onIngredientChange}
+                                onChange={handleFormChanges}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
-
-                            <button className="modalButton" onClick={handleIngredientSaveClick}>Save</button>
                         </div>
 
                     <div className="grid-item3">
                         <div><label className="containerLabel">DIRECTIONS</label></div>
                             <div><textarea
+                                name="instructions"
                                 className="longTextArea"
-                                value={editDirectionsValue}
+                                value={formData.instructions}
                                 rows={20}
-                                onChange={onDirectionsChange}
+                                onChange={handleFormChanges}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
-                        <button className="modalButton" onClick={handleDirectionsSaveClick}>Save</button>
                     </div>
+
+                    <button className="modalButton"> Save </button>
 
                     <div className="grid-item4">
                         <div><label className="containerLabel">COMMENTS</label></div>
                             <div><textarea
+                                name="comment"
                                 className="commentTextArea"
-                                value={editComments}
+                                value={formData.comment}
                                 rows={6}
-                                onChange={onCommentChange}
+                                onChange={handleFormChanges}
                                 onKeyDown={onKeyDown}
                             ></textarea></div>
-                        <button className="modalButton" onClick={handleCommentsSaveClick}>Save</button>
                     </div>
 
                     <div className="grid-item5">
