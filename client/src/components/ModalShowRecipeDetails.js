@@ -11,7 +11,8 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}
     const defaultIngredientFormEdit = {
             ingredients: valIngredients.join("\n"),
             instructions: valDirections.join("\n"),
-            comment: commentVal
+            comment: commentVal,
+            recipe_name: clickedRecipe.recipe_name
     }
 
     const [formData, setFormData] = useState(defaultIngredientFormEdit)
@@ -36,7 +37,8 @@ function handleRecipeFormSubmit (e) {
         body: JSON.stringify({
             ingredients: [formData.ingredients],
             instructions: [formData.instructions],
-            comment: formData.comment
+            comment: formData.comment,
+            recipe_name: formData.recipe_name
         })
     })
     .then((res) => res.json())
@@ -101,8 +103,13 @@ function handleRecipeFormSubmit (e) {
             <div className="contentWrapper scroll">
             <button className="closeModalButton" onClick={closeModal}><GrClose/></button>
                 <div className="grid-container">
-                    <div className="grid-item1">
-                        <h1 contenteditable="true">{clickedRecipe.recipe_name}</h1>
+                <form onSubmit={handleRecipeFormSubmit}>
+                    <textarea className="grid-item1">
+                        <div contenteditable="true"
+                            onInput={handleFormChanges}
+                            name="recipe_name"
+                            value={formData.ingredients}
+                        >{formData.recipe_name}</textarea>
                         <h4>Upload A Photo</h4>
                         <input
                           type="file"
@@ -111,7 +118,7 @@ function handleRecipeFormSubmit (e) {
                         ></input>  
                         <div><button className="modalButton" onClick={submittingImage}> Save Image</button></div>
                     </div>
-                        <form onSubmit={handleRecipeFormSubmit}>
+
                         <div className="grid-item2">
                             <div><label className="containerLabel">INGREDIENTS</label></div>
                             <div><textarea
