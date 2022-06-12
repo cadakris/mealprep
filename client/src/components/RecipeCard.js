@@ -4,15 +4,14 @@ import { RiDeleteBin2Fill, } from "react-icons/ri"
 import { GrDuplicate, } from "react-icons/gr";
 import { FaEdit } from "react-icons/fa"
 
+
 function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, clickedRecipe, onDuplicateClick}) {
-  
     function handleDeleteClick() {
         fetch(`/recipes/${recipe.id}`, {
           method: "DELETE",
         })
         .then((res) => res.json())
         .then((deletedData) => {
-          console.log(deletedData)
           fetch(`/users/${user.id}/days`)
           .then((res) => res.json())
           .then((arrOfDays) => setColumnDays(arrOfDays))

@@ -1,12 +1,21 @@
 /* FONTS ---------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,800');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Raleway:wght@300;600&family=Yantramanav:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&family=Poppins&family=Raleway:wght@300;600&family=Yantramanav:wght@300;400&display=swap');
 
 /* GENERAL --------------------------------------------------------- */
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.errorMessage {
+  margin-top: 5%;
+  color: rgb(225, 75, 75);
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: .08em;
+  font-size: 1.1em;
+
 }
 
 /* NAV BAR---------------------------------------------------------> */
@@ -625,7 +634,6 @@ label.containerLabel {
   align-items: center;
 
 }
-
 
 .modalImgContainer {
   width: 80%;

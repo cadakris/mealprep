@@ -18,13 +18,14 @@ x - Fix background bleeding issue
 x - create profile page
 x - Need to be able to edit the recipe name and add category to the modal recipe
 x - Need to refactor so that there is only one save button 
+x - fix the password seeing on signup and error messages
+x - Toast for saving edited recipes
+
 
 STILL TO DO
 x/- Duplicate Recipe...still won't do the rest of the functions
-- Style the actual recipe adding page
 - Fix when you have to move the index and it persists
-- Somehow create a search function? 
+- Create a search function? 
 - I want to create a generic homepage where ppl can see all the recipes but then need to log in if they are not a user
 - Create error messages for entering in the application
-- fix the password seeing on form
 - Be able to edit category

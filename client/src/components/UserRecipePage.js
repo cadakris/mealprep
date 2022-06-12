@@ -72,7 +72,7 @@ function UserRecipePage({setUser, user}) {
       }
     )}
 
-  //HANDLING FORM INPUTS
+  //HANDLING FORM INPUTSs
 function handleChange (e) {
   setFormData({
     ...formData, [e.target.name]: e.target.value,
@@ -87,7 +87,6 @@ function closeModal() {
 //THIS IS FOR THE TOAST
   const notify = () => toast.dark ("Your recipe has been added!")
 
-  
 //THIS IS THE DRAG AND DROP FUNCTION
   const onDragEnd = (result, columnsDays, setColumnDays) => {
     console.log("columnDays:", columnDays)

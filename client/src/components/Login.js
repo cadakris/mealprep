@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { FaEyeSlash, FaEye} from "react-icons/fa"
 
 const defaultFormState = { username: "", password: "" };
 
 function Login({setUser}) {
 
-const [formData, setFormData] = useState(defaultFormState)
+const [formData, setFormData] = useState(defaultFormState);
 const [error, setError] = useState(null);
+const [showPassword, setShowPassword] = useState(false)
 
 const navigate = useNavigate();
+
+const passwordShownIcon = showPassword === true ? <FaEye size={16} /> : <FaEyeSlash size={16} />;
+
+function togglePassword(e) {
+  console.log("clicked")
+  e.preventDefault();
+  setShowPassword(!showPassword)
+}
 
 function handleChange (e) {
     setFormData({
@@ -41,7 +51,7 @@ function handleSubmit (e) {
 
           } else {
             if (userObj.error) {
-              setError(userObj.error.login);
+              setError(userObj.error);
             } else {
               setError(null);
             }
@@ -51,9 +61,7 @@ function handleSubmit (e) {
         .catch((error) => console.log(error.message));
 }
 
-
 const errorsToDisplay = error === null ? null : error;
-
 
   return (
     <>
@@ -71,11 +79,13 @@ const errorsToDisplay = error === null ? null : error;
             <label>Password</label>
             <input
               className="loginsignupinput"
-                type="text"
+                type={showPassword ? 'text' : 'password'}
+                // type="text"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
             ></input>
+            <button className="icon" onClick={(e) => togglePassword(e)}> {passwordShownIcon} </button>
             <button className="landingPageButton">Log In</button>
             <span className="errorMessage">{errorsToDisplay}</span>
         </form>

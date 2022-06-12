@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Axios from 'axios'
 import { GrClose } from "react-icons/gr"
+import { ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}) {
@@ -20,6 +22,8 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}
     const [formData, setFormData] = useState(defaultIngredientFormEdit)
     const [imageInfo, setImageInfo] = useState("")
     const [imageSelected, setImageSelected] = useState('')
+
+    const savedNotify = () => toast.dark ("Your changes have been saved!")
 
 //HANDLE ALL ONCHANGES
     function handleFormChanges (e) {
@@ -48,6 +52,7 @@ function handleRecipeFormSubmit (e) {
     .then((res) => res.json())
     .then((updatedRecipeData) => {
         setFormData(updatedRecipeData)
+        savedNotify()
     })
     .then(() => {
         fetch(`/users/${user.id}/days`)

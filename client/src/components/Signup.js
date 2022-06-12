@@ -93,14 +93,6 @@ const errorsToDisplay = errors === null ? null : errors[0];
                         value={formData.username}
                         onChange={handleChange}
                     ></input>
-                {/* <label> Email Address: </label>
-                    <input
-                        className="loginsignupinput"
-                        type="text"
-                        name="email_address"
-                        value={formData.email_address}
-                        onChange={handleChange}
-                    ></input> */}
                 <label> Password: </label>
                     <input
                         className="loginsignupinput"
@@ -118,7 +110,7 @@ const errorsToDisplay = errors === null ? null : errors[0];
                         onChange={handleChange}
                     ></input>     
 
-            <button className="icon" onClick={(e) => togglePassword(e)}>            {passwordShownIcon} </button>
+            <button className="icon" onClick={(e) => togglePassword(e)}> {passwordShownIcon} </button>
       
             <button className="landingPageButton" onClick={handleSignUpButton}>Submit!</button>
             <span className="errorMessage">{errorsToDisplay}</span>
