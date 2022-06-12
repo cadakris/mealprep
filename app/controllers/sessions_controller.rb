@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
             session[:user_id] ||= user.id
             render json: user
         else 
-            render json: { error: "Please login or create an account"}, status: :unauthorized
+            render json: { error: "Not a valid user. Please login or create an account"}, status: :unauthorized
 
         end
     end
