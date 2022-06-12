@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import { GrClose } from "react-icons/gr"
 
+
 function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}) {
 
     const valIngredients = clickedRecipe.ingredients
@@ -12,7 +13,8 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}
             ingredients: valIngredients.join("\n"),
             instructions: valDirections.join("\n"),
             comment: commentVal,
-            recipe_name: clickedRecipe.recipe_name
+            recipe_name: clickedRecipe.recipe_name,
+            categories: clickedRecipe.categories
     }
 
     const [formData, setFormData] = useState(defaultIngredientFormEdit)
@@ -22,8 +24,9 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}
 //HANDLE ALL ONCHANGES
     function handleFormChanges (e) {
         setFormData({...formData, [e.target.name]: e.target.value})
+        setFormData({...formData, recipe_name: e.target.innerText})
     }
-
+    
 // HANDLE ENTIRE SUBMIT FOR EACH CATEGORY 
 function handleRecipeFormSubmit (e) {
     e.preventDefault()
@@ -38,7 +41,8 @@ function handleRecipeFormSubmit (e) {
             ingredients: [formData.ingredients],
             instructions: [formData.instructions],
             comment: formData.comment,
-            recipe_name: formData.recipe_name
+            recipe_name: formData.recipe_name,
+            categories: formData.categories
         })
     })
     .then((res) => res.json())
@@ -63,7 +67,6 @@ function handleRecipeFormSubmit (e) {
             console.log("shift and enter key")
       } 
     }
-
 
 //UPLOAD PHOTO FROM CLOUDINARY // MAKING AXIOS POST REQUEST
  const uploadImage = (files) => {
@@ -95,29 +98,44 @@ function handleRecipeFormSubmit (e) {
         .then((arrOfDays) => setColumnDays(arrOfDays))
     })
  }
-
  
  return (
      <div className="modal-background-mask">
         <div className="modal">
             <div className="contentWrapper scroll">
             <button className="closeModalButton" onClick={closeModal}><GrClose/></button>
-                <div className="grid-container">
                 <form onSubmit={handleRecipeFormSubmit}>
-                    <textarea className="grid-item1">
-                        <div contenteditable="true"
-                            onInput={handleFormChanges}
-                            name="recipe_name"
-                            value={formData.ingredients}
-                        >{formData.recipe_name}</textarea>
-                        <h4>Upload A Photo</h4>
-                        <input
-                          type="file"
-                          onChange={(e) => {
-                              uploadImage(e.target.files)}}
-                        ></input>  
-                        <div><button className="modalButton" onClick={submittingImage}> Save Image</button></div>
-                    </div>
+                    <div className="grid-container">
+                        <div className="grid-item1">
+                            <div
+                                contenteditable="true"
+                                onBlur={handleFormChanges}
+                                name="recipe_name"
+                                value={formData.recipe_name}
+                            > <h1>{formData.recipe_name}</h1>
+                            </div>
+
+                            <div>
+                            <h4 className={`${formData.categories}`}>{formData.categories}</h4>
+                            {/* <select className="category"
+                                name="categories"
+                                onChange={handleFormChanges}
+                                // value={formData.categories}
+                            >
+                                <option>Change Category</option>
+                                <option name="categories">Breakfast</option>
+                                <option name="categories">Lunch</option>
+                                <option name="categories">Dinner</option>
+                                <option name="categories">Snack</option>
+                            </select> */}
+                            </div>
+
+                            <h3>Upload A Photo</h3>
+                                <input
+                                    type="file"
+                                    onChange={(e) => {uploadImage(e.target.files)}}
+                                ></input>
+                        </div>
 
                         <div className="grid-item2">
                             <div><label className="containerLabel">INGREDIENTS</label></div>
@@ -128,45 +146,49 @@ function handleRecipeFormSubmit (e) {
                                 rows={20}
                                 onChange={handleFormChanges}
                                 onKeyDown={onKeyDown}
-                            ></textarea></div>
+                            ></textarea>
+                            </div>
                         </div>
 
-                    <div className="grid-item3">
-                        <div><label className="containerLabel">DIRECTIONS</label></div>
-                            <div><textarea
-                                name="instructions"
-                                className="longTextArea"
-                                value={formData.instructions}
-                                rows={20}
-                                onChange={handleFormChanges}
-                                onKeyDown={onKeyDown}
-                            ></textarea></div>
-                    </div>
+                        <div className="grid-item3">
+                            <div><label className="containerLabel">DIRECTIONS</label></div>
+                                <div><textarea
+                                    name="instructions"
+                                    className="longTextArea"
+                                    value={formData.instructions}
+                                    rows={20}
+                                    onChange={handleFormChanges}
+                                    onKeyDown={onKeyDown}
+                                ></textarea>
+                                </div>
+                        </div>
 
-                    <button className="modalButton"> Save </button>
+                        <div className="grid-item4">
+                            <div><label className="containerLabel">COMMENTS</label></div>
+                                <div><textarea
+                                    name="comment"
+                                    className="commentTextArea"
+                                    value={formData.comment}
+                                    rows={6}
+                                    onChange={handleFormChanges}
+                                    onKeyDown={onKeyDown}
+                                ></textarea>
+                                </div>
+                                <button className="modalButton"> Save </button> 
+                        </div>
 
-                    <div className="grid-item4">
-                        <div><label className="containerLabel">COMMENTS</label></div>
-                            <div><textarea
-                                name="comment"
-                                className="commentTextArea"
-                                value={formData.comment}
-                                rows={6}
-                                onChange={handleFormChanges}
-                                onKeyDown={onKeyDown}
-                            ></textarea></div>
-                    </div>
-
-                    <div className="grid-item5">
+                        <div className="grid-item5">
                             <div className="modalImgContainer">
                                 <img src={imageInfo? imageInfo : clickedRecipe.image_url }></img>
+                                {imageInfo ? <button className="modalButton" onClick={submittingImage}> Save Image</button> : null }
+                                
                             </div>
-                    </div> 
-                    </form>
-                </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>      
-    </div>
+        </div>
+    </div>      
   )
 }
 

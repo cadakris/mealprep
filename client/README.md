@@ -15,15 +15,16 @@ x - Modal for add recipe page (covered the background, not a real solution need 
 x - style the cards 
 x - Style user recipe page
 x - Fix background bleeding issue
+x - create profile page
+x - Need to be able to edit the recipe name and add category to the modal recipe
+x - Need to refactor so that there is only one save button 
 
 STILL TO DO
-x/- create profile page
 x/- Duplicate Recipe...still won't do the rest of the functions
 - Style the actual recipe adding page
 - Fix when you have to move the index and it persists
-- Fix moving footer or take it out
 - Somehow create a search function? 
-- Need to be able to edit the recipe name and category 
-- Need to refactor so that there is only one save button 
 - I want to create a generic homepage where ppl can see all the recipes but then need to log in if they are not a user
 - Create error messages for entering in the application
+- fix the password seeing on form
+- Be able to edit category

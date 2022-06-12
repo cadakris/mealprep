@@ -2,11 +2,9 @@ import React from 'react'
 import { Draggable } from "react-beautiful-dnd"
 import { RiDeleteBin2Fill, } from "react-icons/ri"
 import { GrDuplicate, } from "react-icons/gr";
-
 import { FaEdit } from "react-icons/fa"
 
 function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, clickedRecipe, onDuplicateClick}) {
-
   
     function handleDeleteClick() {
         fetch(`/recipes/${recipe.id}`, {
@@ -64,12 +62,9 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
         .then((res) => res.json())
         .then((completeDuplicateInfo) => {
           setColumnDays(completeDuplicateInfo)})
-
       })
       onDuplicateClick()
       })
-    
-    
   }
 
   return (

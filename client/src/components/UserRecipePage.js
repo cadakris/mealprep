@@ -260,7 +260,6 @@ function closeModal() {
       )}
     </Droppable>
   )
-
 }
 })}
     </div>

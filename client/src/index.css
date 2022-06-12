@@ -551,20 +551,20 @@ select.category {
 .grid-item2 {
   grid-area: ingredients;
   text-align: center;
-  margin-top: 4%;
+  margin-top: 15%;
 }
 
 .grid-item3 {
   grid-area: instructions;
   text-align: center;
-  margin-top: 4%;
+  margin-top: 15%;
 }
 
 .grid-item4 {
   grid-area: comments;
   text-align: center;
   height: 16em;
-  margin-top: 5%;
+  margin: 5% 0;
 }
 
 .grid-item5 {
@@ -573,7 +573,7 @@ select.category {
 }
 
 .grid-item5 img {
-  width: 50%;
+  width: 100%;
   margin-bottom: 4%;
   margin-top: 4%;
 }
@@ -589,15 +589,23 @@ select.category {
       "comments comments";
 }
 
-.grid-item1 h4 {
+.grid-item1 h3 {
   font-family: 'Poppins';
-  font-size: 1.5em;
+  font-size: 1em;
+  margin-top: 5%
+}
+
+.grid-item1 h4  {
+  font-family: 'Poppins';
+  font-size: 1em;
+  width: 20%;
+  margin: 0 auto;
 }
 
 .grid-container h1 {
   text-align: center;
   margin: 10% 8% 5%; 
-  font-size: 3.5em;
+  font-size: 2.8em;
   font-family: 'Yantramanav', sans-serif;
   color: #ff4b2b;
 }
@@ -615,6 +623,7 @@ label.containerLabel {
   margin-left: auto;
   margin-right: auto;
   align-items: center;
+
 }
 
 
@@ -628,7 +637,7 @@ input:hover {
 }
 
 .longTextArea {
-  margin-top: 24px;
+  margin-top: 2%;
   resize: none;
   overflow: hidden;
   width: 80%;
@@ -641,6 +650,8 @@ input:hover {
 }
 
 .commentTextArea {
+  margin-top: 2%;
+  margin-bottom: 4%;
   width: 90%;
   resize: none;
   overflow: hidden;
@@ -656,7 +667,7 @@ input:hover {
   color: #fff;
   font-size: 12px;
   font-weight: bold;
-  padding: 12px 45px;
+  padding: 12px 30px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
