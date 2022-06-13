@@ -20,6 +20,8 @@ x - Need to be able to edit the recipe name and add category to the modal recipe
 x - Need to refactor so that there is only one save button 
 x - fix the password seeing on signup and error messages
 x - Toast for saving edited recipes
+x - Create error messages for entering in the application
+x - Must put a recipe name before adding recipe (recipe name can't be blank)
 
 
 STILL TO DO
@@ -27,5 +29,4 @@ x/- Duplicate Recipe...still won't do the rest of the functions
 - Fix when you have to move the index and it persists
 - Create a search function? 
 - I want to create a generic homepage where ppl can see all the recipes but then need to log in if they are not a user
-- Create error messages for entering in the application
 - Be able to edit category

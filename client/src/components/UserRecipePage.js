@@ -203,7 +203,7 @@ function closeModal() {
                 <form onSubmit={handleFormSubmit}>
                       <input className="addRecipe"
                         placeholder='Add Recipe Name'
-                        type="text"
+                        type="text" required
                         name="recipe_name"
                         onChange={handleChange}
                         value={formData.recipe_name}
