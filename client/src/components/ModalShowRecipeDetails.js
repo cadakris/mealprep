@@ -16,7 +16,7 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}
             instructions: valDirections.join("\n"),
             comment: commentVal,
             recipe_name: clickedRecipe.recipe_name,
-            categories: clickedRecipe.categories
+            // categories: clickedRecipe.categories
     }
 
     const [formData, setFormData] = useState(defaultIngredientFormEdit)
@@ -114,10 +114,10 @@ function handleRecipeFormSubmit (e) {
                         <div className="grid-item1">
                             <div
                                 contenteditable="true"
-                                onBlur={handleFormChanges}
+
                                 name="recipe_name"
                                 value={formData.recipe_name}
-                            > <h1>{formData.recipe_name}</h1>
+                            > <h1                                 onBlur={handleFormChanges}>{formData.recipe_name}</h1>
                             </div>
 
                             <div>

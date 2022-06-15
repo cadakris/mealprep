@@ -20,6 +20,7 @@ function UserRecipePage({setUser, user}) {
   const [columnDays, setColumnDays] = useState({})
   const [formData, setFormData] = useState(defaultFormState)
   const [clickedRecipe, setClickedRecipe] = useState(null)
+  const [searchedRecipe, setSearchedRecipe] = useState("")
 
 // FETCH USER'S DAY OF THE WEEK
     useEffect(() => {
@@ -72,7 +73,7 @@ function UserRecipePage({setUser, user}) {
       }
     )}
 
-  //HANDLING FORM INPUTSs
+  //HANDLING FORM INPUTS
 function handleChange (e) {
   setFormData({
     ...formData, [e.target.name]: e.target.value,
@@ -179,11 +180,26 @@ function closeModal() {
   console.log("user: ", user)
   console.log("days user id: ", columnDays)
 
-
+  //HANDLE SEARCHING FOR RECIPES
+function handleSearch(e) {
+  setSearchedRecipe(e.target.value)
+}
 
 //START OF THE RETURN
   return (
 <>
+<div className="searchBar">
+  <h3>Search For A Recipe</h3>
+  <input
+    type="text"
+    className="search"
+    placeholder='Search'
+    value={searchedRecipe}
+    onChange={handleSearch}
+  ></input>
+</div>
+
+
 <div className="userRecipePageBackground">
 <DragDropContext onDragEnd={result => onDragEnd(result, columnDays, setColumnDays )}>
   <div className="column-container dayScroll">

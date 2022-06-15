@@ -27,6 +27,6 @@ x - Must put a recipe name before adding recipe (recipe name can't be blank)
 STILL TO DO
 x/- Duplicate Recipe...still won't do the rest of the functions
 - Fix when you have to move the index and it persists
-- Create a search function? 
+- Create a search function where type in search box and the recipe name pops up as a dropdown. * ONLY FROM RECIPES * Then when they click on it the modal opens up. 
 - I want to create a generic homepage where ppl can see all the recipes but then need to log in if they are not a user
-- Be able to edit category
+x/- Be able to edit category ** ISSUES - Does not persist properly 

@@ -101,7 +101,6 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
                 </div>
             </div>
         )}
-
     </Draggable>
     </>
   )
