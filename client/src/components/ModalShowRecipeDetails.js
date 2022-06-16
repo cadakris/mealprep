@@ -12,14 +12,15 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}
     const commentVal = clickedRecipe.comment
 
     const defaultIngredientFormEdit = {
-            ingredients: valIngredients.join("\n"),
-            instructions: valDirections.join("\n"),
-            comment: commentVal,
-            recipe_name: clickedRecipe.recipe_name,
-            // categories: clickedRecipe.categories
+        ingredients: valIngredients.join("\n"),
+        instructions: valDirections.join("\n"),
+        comment: commentVal,
+        recipe_name: clickedRecipe.recipe_name,
+        categories: clickedRecipe.categories
     }
 
     const [formData, setFormData] = useState(defaultIngredientFormEdit)
+    //const [recipeNameChage, setRecipeNameChange] = useState(defaultIngredientFormEdit.recipe_name)
     const [imageInfo, setImageInfo] = useState("")
     const [imageSelected, setImageSelected] = useState('')
 
@@ -28,7 +29,7 @@ function ModalShowRecipeDetails({clickedRecipe, closeModal, user, setColumnDays}
 //HANDLE ALL ONCHANGES
     function handleFormChanges (e) {
         setFormData({...formData, [e.target.name]: e.target.value})
-        setFormData({...formData, recipe_name: e.target.innerText})
+        // setRecipeNameChange({"recipe_name": e.target.value})
     }
     
 // HANDLE ENTIRE SUBMIT FOR EACH CATEGORY 
@@ -46,7 +47,7 @@ function handleRecipeFormSubmit (e) {
             instructions: [formData.instructions],
             comment: formData.comment,
             recipe_name: formData.recipe_name,
-            categories: formData.categories
+            //categories: formData.cagetories
         })
     })
     .then((res) => res.json())
@@ -113,11 +114,14 @@ function handleRecipeFormSubmit (e) {
                     <div className="grid-container">
                         <div className="grid-item1">
                             <div
-                                contenteditable="true"
-
+                                // contenteditable="true"
+                            ><textarea
                                 name="recipe_name"
+                                className="recipeNameStyles"
+                                onChange={handleFormChanges}
                                 value={formData.recipe_name}
-                            > <h1                                 onBlur={handleFormChanges}>{formData.recipe_name}</h1>
+                                onKeyDown={onKeyDown}
+                            ></textarea>
                             </div>
 
                             <div>

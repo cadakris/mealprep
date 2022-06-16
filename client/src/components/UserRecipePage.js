@@ -199,7 +199,6 @@ function handleSearch(e) {
   ></input>
 </div>
 
-
 <div className="userRecipePageBackground">
 <DragDropContext onDragEnd={result => onDragEnd(result, columnDays, setColumnDays )}>
   <div className="column-container dayScroll">
