@@ -22,8 +22,11 @@ function Navbar({setUser}) {
   return (
     <>
         <div className="navbarContainer">
-          <div className="linkContainer">
+
           <ul>
+            <li><h1 className="logo" className="logo">ReciPrep</h1></li>
+
+            <div className="linkContainer">
             <li>
               <button className="btnstyle" onClick={() => navigate("/user-recipe-page")}><ImSpoonKnife size={20}/></button>
             </li>
@@ -33,8 +36,11 @@ function Navbar({setUser}) {
             <li>
               <button className="btnstyle"onClick={handleLogoutClick}><FiLogOut size={20}/></button>
             </li>
+            </div>
+
+
           </ul>
-          </div>
+
         </div>
     </>
 

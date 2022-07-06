@@ -5,6 +5,7 @@ import { GrAddCircle } from "react-icons/gr"
 import RecipeCard from './RecipeCard';
 import { ToastContainer,toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SearchRecipe from './SearchRecipe';
 
 //DEFAULT FORM INFORMATION TO PLUG INTO STATE FOR THE FORM
 const defaultFormState = {
@@ -17,17 +18,26 @@ const defaultFormState = {
  
 function UserRecipePage({setUser, user}) {
 //set columndays gets the data - title, description, the columns etc. 
-  const [columnDays, setColumnDays] = useState({})
+  const [columnDays, setColumnDays] = useState([])
   const [formData, setFormData] = useState(defaultFormState)
   const [clickedRecipe, setClickedRecipe] = useState(null)
   const [searchedRecipe, setSearchedRecipe] = useState("")
+  const [recipeInfo, setRecipeInfo] = useState([])
 
 // FETCH USER'S DAY OF THE WEEK
-    useEffect(() => {
-      fetch(`/users/${user.id}/days`)
-      .then((res) => res.json())
-      .then((arrOfDays) => setColumnDays(arrOfDays))
-    },[])
+useEffect(() => {
+  fetch(`/users/${user.id}/days`)
+  .then((res) => res.json())
+  .then((arrOfDays) => setColumnDays(arrOfDays))
+},[])
+
+// //FETCH USER'S RECIPES? MAYBE IDK...change this
+// useEffect(() => {
+//   fetch(`/recipes`)
+//   .then((res) => res.json())
+//   .then((recipeData) => setRecipeInfo(recipeData))
+// },[])
+
 
   //FORM POSTING
   function handleFormSubmit(e){
@@ -180,26 +190,11 @@ function closeModal() {
   console.log("user: ", user)
   console.log("days user id: ", columnDays)
 
-  //HANDLE SEARCHING FOR RECIPES
-function handleSearch(e) {
-  setSearchedRecipe(e.target.value)
-}
-
 //START OF THE RETURN
   return (
 <>
-<div className="searchBar">
-  <h3>Search For A Recipe</h3>
-  <input
-    type="text"
-    className="search"
-    placeholder='Search'
-    value={searchedRecipe}
-    onChange={handleSearch}
-  ></input>
-</div>
-
 <div className="userRecipePageBackground">
+<SearchRecipe recipeInfo={recipeInfo} setRecipeInfo={recipeInfo} columnDays={columnDays} setClickedRecipe={setClickedRecipe}/>
 <DragDropContext onDragEnd={result => onDragEnd(result, columnDays, setColumnDays )}>
   <div className="column-container dayScroll">
     <div className="columnDays">

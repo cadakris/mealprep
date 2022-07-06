@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :index, :update] do
     resources :days, only: [:index, :show, :create, :update] do
-      resources :recipes, only: [:create, :show, :update]
+      resources :recipes, only: [:create, :show, :update, :index]
     end
   end
 
@@ -18,9 +18,9 @@ Rails.application.routes.draw do
   end
 
   
-    resources :recipes, only: [:create, :show, :update, :index] do 
-      resources :days, only: [:index, :show, :create, :update]
-    end
+  resources :recipes, only: [:create, :show, :update, :index] do 
+    resources :days, only: [:index, :show, :create, :update]
+  end
   
 
   post "/signup", to: "users#create"
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
   get "/user/:id", to: "users#getsuser"
+
 
 
   # Routing logic: fallback requests for React Router.

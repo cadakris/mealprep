@@ -10,10 +10,10 @@ class UsersController < ApplicationController
 #     end
 #   end  
 
+
     def index
         render json: User.all
     end
-
 
     def update
         current_user = User.find_by!(id: session[:user_id])
@@ -27,7 +27,6 @@ class UsersController < ApplicationController
 
 #POST 
     def create
-        
         user = User.create!(user_params)
         # save user's ID in the session hash
         session[:user_id] = user.id
@@ -47,6 +46,11 @@ class UsersController < ApplicationController
     def show
         user = User.find_by!(id: session[:user_id])
         render json: user
+    end
+
+    def userRecipe
+        recipe = Recipe.all.where!(user_id: session[:user_id])
+        render json: recipe
     end
 
     private

@@ -1,6 +1,7 @@
 /* FONTS ---------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,800');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&family=Poppins&family=Raleway:wght@300;600&family=Yantramanav:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bevan&display=swap');
 
 /* GENERAL --------------------------------------------------------- */
 *{
@@ -26,13 +27,24 @@
   background: linear-gradient(90deg, rgba(255, 75, 43,1) 20%, rgb(249, 251, 253) 100%);
 }
 
+h1.logo {
+  font-family: 'Bevan', cursive;
+  color: #f5f5f5;
+  text-shadow: 1.2px 1.2px #de9000, 3px 3px black;
+  font-size: 2.5em;
+  padding-left: 20px;
+}
+
 .linkContainer {
-  margin-left: 80%;
-  margin-bottom: 8px;
+  display: inline;
+  position: relative;
+  float:right;
+  padding-right: 70px;
 }
 
 ul {
   padding-top: 10px;
+  display:inline;
 }
 
 li { 
@@ -69,6 +81,7 @@ li {
   width: 100%; 
   left: 0; 
 }
+
 /* LOGIN / SIGNUP ---------------------------------------------------------> */
 .bodyContainer {
   min-height: 100%;
@@ -861,3 +874,13 @@ table {
   border-radius: 20px;
 }
 
+
+/* Searchbar container */
+
+.searchBarContainer {
+  width: 30%;
+  font-family: 'Arial';
+  font-size: 16;
+  margin: 0 auto;
+  padding-top: 12px;
+}

@@ -6,6 +6,7 @@ import { FaEdit } from "react-icons/fa"
 
 
 function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, clickedRecipe, onDuplicateClick}) {
+
     function handleDeleteClick() {
         fetch(`/recipes/${recipe.id}`, {
           method: "DELETE",
@@ -19,9 +20,9 @@ function RecipeCard({recipe, index, setColumnDays, user, setClickedRecipe, click
       }
 
     function handleEditClick () {
-      console.log("Clicked Recipe",clickedRecipe)
       setClickedRecipe(recipe)
     }
+    console.log(clickedRecipe)
 
     function handleDuplicateClick () {
       // fetch(`meal_recipe_days/${recipe.id}`)

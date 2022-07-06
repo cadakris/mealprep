@@ -2,14 +2,18 @@ class RecipesController < ApplicationController
 
     before_action :find_recipe, only: [:show, :update, :destroy]
     
-
 # GET / Show all the users recipes
     def show
         recipe = find_recipe
         render json: recipe
     end
 
+
 # GET / NOT FOR NESTED ROUTES
+    # def index
+    #     render json: Recipe.all
+    # end
+
     def index
         render json: Recipe.all
     end
