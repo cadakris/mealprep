@@ -22,9 +22,8 @@ function Navbar({setUser}) {
   return (
     <>
         <div className="navbarContainer">
-
           <ul>
-            <li><h1 className="logo" className="logo">ReciPrep</h1></li>
+            <li><h1 className="logo">ReciPrep</h1></li>
 
             <div className="linkContainer">
             <li>

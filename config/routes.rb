@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :index, :update] do
     resources :days, only: [:index, :show, :create, :update] do
-      resources :recipes, only: [:create, :show, :update, :index]
+      resources :recipes, only: [:create, :show, :update]
     end
   end
 

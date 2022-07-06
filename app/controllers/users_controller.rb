@@ -48,11 +48,6 @@ class UsersController < ApplicationController
         render json: user
     end
 
-    def userRecipe
-        recipe = Recipe.all.where!(user_id: session[:user_id])
-        render json: recipe
-    end
-
     private
 
     def user_params

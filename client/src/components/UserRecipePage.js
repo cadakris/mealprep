@@ -31,14 +31,6 @@ useEffect(() => {
   .then((arrOfDays) => setColumnDays(arrOfDays))
 },[])
 
-// //FETCH USER'S RECIPES? MAYBE IDK...change this
-// useEffect(() => {
-//   fetch(`/recipes`)
-//   .then((res) => res.json())
-//   .then((recipeData) => setRecipeInfo(recipeData))
-// },[])
-
-
   //FORM POSTING
   function handleFormSubmit(e){
     e.preventDefault()
@@ -171,7 +163,7 @@ function closeModal() {
       console.log('copiedjointable', copiedMealRecipeDays)
       console.log("column",column)
 
-// create fetch to save index
+// create fetch to save index (use for later time)
   // fetch(`/days/${destColumn.id}`, {
   //   method: "PATCH",
   //   headers: {
@@ -186,7 +178,6 @@ function closeModal() {
 
     }
   }
-
   console.log("user: ", user)
   console.log("days user id: ", columnDays)
 
@@ -264,7 +255,6 @@ function closeModal() {
           ))}
           {provided.placeholder}
         </div>
-        {/* </div> */}
         </div>
       )}
     </Droppable>

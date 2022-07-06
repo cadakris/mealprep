@@ -1,7 +1,7 @@
 import Select from 'react-select'
 import React from 'react'
 
-function SearchRecipe({recipeInfo, setRecipeInfo, columnDays, setClickedRecipe}) {
+function SearchRecipe({ columnDays, setClickedRecipe }) {
 
 //This uses the data and creates an array of objects for react-select
   const searchList = columnDays.map((day) => day.recipes.map((recipe) =>  ([{label: recipe.recipe_name, value: recipe.id }]))).flat()
@@ -27,7 +27,6 @@ const selectStyles = {
       }; 
     }
   };
-
 
   return (
     <>
