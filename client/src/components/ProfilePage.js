@@ -54,7 +54,7 @@ function ProfilePage({user, setUser}) {
         .then((res) => res.json())
         .then((updatedUserObj) => {
             setUser(updatedUserObj);
-            console.log(updatedUserObj)
+            setProfileForm(updatedUserObj)
         })
 
         //reset form to show user data
@@ -62,8 +62,7 @@ function ProfilePage({user, setUser}) {
             name: profileForm.full_name,
             username: profileForm.username,
             email_address: profileForm.email_address,
-            bio: profileForm.bio,
-
+            bio: profileForm.bio
         })
         setEditModeOff(true)
     }
