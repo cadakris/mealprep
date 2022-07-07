@@ -21,7 +21,7 @@ function UserRecipePage({setUser, user}) {
   const [columnDays, setColumnDays] = useState([])
   const [formData, setFormData] = useState(defaultFormState)
   const [clickedRecipe, setClickedRecipe] = useState(null)
-  const [searchedRecipe, setSearchedRecipe] = useState("")
+  const [searchedRecipe, setSearchedRecipe] = useState([])
   const [recipeInfo, setRecipeInfo] = useState([])
 
 // FETCH USER'S DAY OF THE WEEK
@@ -29,6 +29,13 @@ useEffect(() => {
   fetch(`/users/${user.id}/days`)
   .then((res) => res.json())
   .then((arrOfDays) => setColumnDays(arrOfDays))
+},[])
+
+// FETCH USER'S DAY OF THE WEEK
+useEffect(() => {
+  fetch(`/users/${user.id}/days`)
+  .then((res) => res.json())
+  .then((arrOfDays) => setSearchedRecipe(arrOfDays))
 },[])
 
   //FORM POSTING
@@ -185,7 +192,7 @@ function closeModal() {
   return (
 <>
 <div className="userRecipePageBackground">
-<SearchRecipe recipeInfo={recipeInfo} setRecipeInfo={recipeInfo} columnDays={columnDays} setClickedRecipe={setClickedRecipe}/>
+<SearchRecipe recipeInfo={recipeInfo} setSearchedRecipe={setSearchedRecipe} searchedRecipe={searchedRecipe} columnDays={columnDays} setClickedRecipe={setClickedRecipe}/>
 <DragDropContext onDragEnd={result => onDragEnd(result, columnDays, setColumnDays )}>
   <div className="column-container dayScroll">
     <div className="columnDays">

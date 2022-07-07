@@ -1,10 +1,10 @@
 import Select from 'react-select'
 import React from 'react'
 
-function SearchRecipe({ columnDays, setClickedRecipe }) {
+function SearchRecipe({ columnDays, setClickedRecipe, setSearchedRecipe, searchedRecipe }) {
 
 //This uses the data and creates an array of objects for react-select
-  const searchList = columnDays.map((day) => day.recipes.map((recipe) =>  ([{label: recipe.recipe_name, value: recipe.id }]))).flat()
+  const searchList = searchedRecipe.map((day) => day.recipes.map((recipe) =>  ([{label: recipe.recipe_name, value: recipe.id }]))).flat()
   //This filters out any days that do not have any recipes
     let filteredList = searchList.filter(list => list.length !==0)
     let userRecipeDropdownList = [].concat(...filteredList)
