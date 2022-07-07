@@ -2,6 +2,16 @@ ABOUT
 
 ReciPrep is a web application that allows users to put save and edit their favorite recipes and meal prep for the week at the same time. 
 
+ROJECT REQUIREMENTS:
+
+- Use a Rails API backend with a React frontend.
+- Have at least three models on the backend, that include:
+  - at least one one-to-many relationship
+  - at least one many-to-many relationship
+  - full CRUD actions for at least one resource
+- Have at least three different client-side routes using React Router. Be sure to include a nav bar or other UI element that allows users to navigate between routes.
+- Implement authentication/authorization, including password protection. A user should be able to log in to the site with a secure password and stay logged in via user ID in the session hash.
+
 
 FINISHED TASKS
 - x Read about drag and drop library
@@ -35,3 +45,8 @@ STILL TO DO / BUGS TO FIX
 - I want to create a generic homepage where ppl can see all the recipes but then need to log in if they are not a user
 - / x Be able to edit category ** ISSUES - Does not persist properly 
 - Need to change search function so that duplicates do not appear 
+
+LEARNING / CREDITS: 
+
+Cloudinary: https://www.youtube.com/watch?v=Y-VgaRwWS3o&amp;list=LL&amp;index=4&amp;t=540s&ab_channel=PedroTech
+Beautiful DnD: https://github.com/atlassian/react-beautiful-dnd
